@@ -94,8 +94,8 @@ const Hero = () => {
             <div className="w-1.5 h-1.5 rounded-full bg-vapor-accent animate-pulse" />
             Studio Premium em Jaconé
           </div>
-          <h1 className="text-7xl md:text-9xl leading-[0.9] font-serif italic text-white text-center">
-            Bella <br/> <span className="text-vapor-accent not-italic font-sans font-black uppercase">Beauty Studio</span>
+          <h1 className="text-7xl md:text-9xl leading-[0.9] font-serif italic text-white text-left">
+            Bella Beauty <br/> <span className="text-vapor-accent not-italic font-sans font-black uppercase">Studio</span>
           </h1>
           <p className="text-lg text-vapor-light/50 max-w-md font-light leading-relaxed">
             Especialistas em realçar sua beleza natural com o equilíbrio perfeito entre arte e tecnologia. Onde cada detalhe é uma assinatura de perfeição.
