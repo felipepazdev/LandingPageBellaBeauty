@@ -60,5 +60,5 @@
 }
 
 .marquee-content {
-  @apply inline-block animate-[marquee_30s_linear_infinite] py-4;
+  @apply inline-flex items-center gap-24 animate-[marquee_40s_linear_infinite] py-4;
 }

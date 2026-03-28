@@ -143,12 +143,14 @@ const BannerTrust = () => {
   
   return (
     <div className="py-12 border-y border-white/5 bg-white/[0.02] marquee-container">
-      <div className="marquee-content flex gap-20 items-center opacity-30">
-        {/* Renderiza quatro vezes para o loop infinito sem cortes em todas as resoluções */}
+      <div className="marquee-content opacity-30">
         {[...items, ...items, ...items, ...items].map((item, index) => (
-          <span key={index} className="font-serif italic text-3xl uppercase tracking-[0.2em] whitespace-nowrap">
-            {item}
-          </span>
+          <React.Fragment key={index}>
+            <span className="font-serif italic text-3xl uppercase tracking-[0.2em] whitespace-nowrap">
+              {item}
+            </span>
+            <span className="text-luxury-gold/40 text-xl mx-4">•</span>
+          </React.Fragment>
         ))}
       </div>
     </div>
