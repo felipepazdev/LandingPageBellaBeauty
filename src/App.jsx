@@ -16,7 +16,8 @@ import {
   Crown,
   Camera,
   PhoneCall,
-  ArrowRight
+  ArrowRight,
+  X
 } from 'lucide-react';
 
 // Ativos Originais
@@ -157,12 +158,88 @@ const BannerTrust = () => {
   );
 };
 
+const ServiceModal = ({ service, onClose }) => {
+  if (!service) return null;
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md transition-all animate-in fade-in duration-300">
+      <div 
+        className="bg-[#0D0D0D] border border-luxury-gold/30 w-full max-w-4xl rounded-[2rem] overflow-hidden relative shadow-[0_0_80px_rgba(0,0,0,0.5)] animate-in zoom-in-95 duration-500"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button 
+          onClick={onClose}
+          className="absolute top-6 right-6 z-20 w-12 h-12 rounded-full bg-black/40 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold hover:scale-110 transition-all duration-300"
+        >
+          <X className="w-6 h-6" />
+        </button>
+        
+        <div className="flex flex-col lg:flex-row min-h-[500px]">
+          {/* Lado da Imagem (Visual de Carrossel/Foco) */}
+          <div className="lg:w-1/2 h-64 lg:h-auto relative group overflow-hidden bg-black">
+            <img 
+              src={service.img} 
+              alt={service.title} 
+              className="w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#0D0D0D] to-transparent pointer-events-none" />
+            
+            <div className="absolute bottom-8 left-8 flex gap-2">
+              <div className="w-8 h-1 bg-luxury-gold rounded-full" />
+              <div className="w-2 h-1 bg-white/20 rounded-full" />
+              <div className="w-2 h-1 bg-white/20 rounded-full" />
+            </div>
+          </div>
+          
+          {/* Lado do Conteúdo */}
+          <div className="lg:w-1/2 p-8 lg:p-14 flex flex-col justify-center space-y-8 bg-[#0D0D0D]">
+            <div className="space-y-3">
+              <span className="text-luxury-gold/60 text-xs font-mono uppercase tracking-[0.3em] font-medium block">Tratamento Premium</span>
+              <h3 className="text-5xl font-serif italic text-white leading-[1.1]">{service.title}</h3>
+            </div>
+            
+            <p className="text-white/50 font-light leading-relaxed text-lg max-w-md italic font-serif">
+              "{service.desc}"
+            </p>
+
+            <div className="space-y-6 pt-4 border-t border-white/5">
+              <div className="flex items-center gap-12">
+                <div className="space-y-1">
+                  <span className="text-[10px] text-white/30 uppercase font-mono tracking-[0.2em]">Investimento</span>
+                  <div className="text-4xl font-sans font-black text-luxury-gold">{service.price}</div>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] text-white/30 uppercase font-mono tracking-[0.2em]">Duração Média</span>
+                  <div className="text-sm font-semibold text-white/80">60 - 90 min</div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a 
+                  href="https://wa.me/5522998393529" 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="flex-1 bg-luxury-gold text-white px-10 py-5 rounded-2xl text-sm font-bold hover:brightness-110 hover:shadow-[0_10px_30px_rgba(197,160,40,0.3)] transition-all flex items-center justify-center gap-3 active:scale-95"
+                >
+                  RESERVAR AGORA
+                  <Zap className="w-4 h-4 fill-current" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ServiceSection = () => {
+  const [selectedService, setSelectedService] = useState(null);
+
   const services = [
-    { title: "Extensão de Cílios", desc: "Volume e curvatura impecáveis para um olhar marcante.", img: lashesImg, price: "R$ 150" },
-    { title: "Micropigmentação", desc: "Cor e definição labial com efeito natural e duradouro.", img: lipsImg, price: "R$ 450" },
-    { title: "Design de Sobrancelhas", desc: "Harmonização facial completa com técnicas avançadas.", img: browsImg, price: "R$ 60" },
-    { title: "Nail Design", desc: "Alongamento e arte que refletem sua personalidade.", img: nailsImg, price: "R$ 120" },
+    { title: "Extensão de Cílios", desc: "Volume e curvatura impecáveis para um olhar marcante, adaptado ao seu formato de rosto.", img: lashesImg, price: "R$ 150" },
+    { title: "Micropigmentação", desc: "Cor e definição labial com efeito natural e duradouro, realçando sua beleza sem exageros.", img: lipsImg, price: "R$ 450" },
+    { title: "Design de Sobrancelhas", desc: "Harmonização facial completa com técnicas avançadas de mapeamento e visagismo.", img: browsImg, price: "R$ 60" },
+    { title: "Nail Design", desc: "Alongamento e arte que refletem sua personalidade com acabamento de alta joalheria.", img: nailsImg, price: "R$ 120" },
   ];
 
   return (
@@ -170,31 +247,40 @@ const ServiceSection = () => {
       <div className="max-w-7xl mx-auto space-y-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="space-y-4">
-            <h2 className="text-6xl italic">Tratamentos <br/> <span className="text-vapor-accent not-italic font-bold">Exclusivos</span></h2>
-            <p className="text-vapor-light/40 font-mono text-sm tracking-widest uppercase">Resultados que transformam</p>
+            <h2 className="text-6xl italic">Tratamentos <br/> <span className="text-luxury-gold not-italic font-black tracking-tighter uppercase">Exclusivos</span></h2>
+            <p className="text-white/20 font-mono text-xs tracking-[0.4em] uppercase">Resultados de alto padrão</p>
           </div>
-          <button className="text-sm font-bold border-b-2 border-vapor-accent pb-2 hover:text-vapor-accent transition-colors">VER DETALHES</button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((s, i) => (
-            <div key={i} className="group cursor-pointer">
-              <div className="h-96 glass-card mb-8 overflow-hidden">
-                <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-vapor-night via-transparent to-transparent opacity-60" />
-                <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
-                  <span className="text-xs font-mono bg-vapor-accent px-3 py-1 rounded-full">{s.price}</span>
-                  <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all">
-                    <ArrowRight className="w-4 h-4" />
+            <div key={i} className="group cursor-pointer" onClick={() => setSelectedService(s)}>
+              <div className="h-[28rem] glass-card mb-8 overflow-hidden rounded-[2.5rem] border-white/5 relative bg-white/[0.02]">
+                <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out opacity-80 group-hover:opacity-100" />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent opacity-90" />
+                
+                <div className="absolute bottom-8 left-8 right-8 flex items-center justify-between">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono tracking-[0.2em] text-luxury-gold/80 block uppercase">A partir de</span>
+                    <span className="text-xl font-black text-white">{s.price}</span>
+                  </div>
+                  <div className="w-14 h-14 rounded-full border border-luxury-gold/30 flex items-center justify-center backdrop-blur-md group-hover:bg-luxury-gold group-hover:border-transparent transition-all duration-500 group-hover:translate-x-1">
+                    <ArrowRight className="w-6 h-6 text-luxury-gold group-hover:text-white transition-colors" />
                   </div>
                 </div>
               </div>
-              <h3 className="text-2xl italic mb-2 tracking-tight">{s.title}</h3>
-              <p className="text-sm text-vapor-light/40 font-light leading-relaxed">{s.desc}</p>
+              <div className="space-y-3 px-2">
+                <h3 className="text-3xl italic tracking-tight font-serif text-white/90">{s.title}</h3>
+                <p className="text-sm text-white/40 font-light leading-relaxed line-clamp-2">{s.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
+
+      {selectedService && (
+        <ServiceModal service={selectedService} onClose={() => setSelectedService(null)} />
+      )}
     </section>
   );
 };
