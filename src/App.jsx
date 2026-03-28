@@ -31,6 +31,7 @@ import volumeBrasileiroImg from './assets/volume-brasileiro.png';
 import volumeAmericanoImg from './assets/volume-americano.png';
 import foxEyesImg from './assets/fox-eyes.png';
 import lashLiftingImg from './assets/lash-lifting.png';
+import microSobrancelhaImg from './assets/micro-sobrancelha.png';
 import salaoRealImg from './assets/salao-real.jpg';
 import kellyImg from './assets/kelly.png';
 import nayaraImg from './assets/nayara.png';
@@ -284,6 +285,7 @@ const ServiceSection = () => {
       img: lipsImg, 
       price: "R$ 450",
       items: [
+        { title: "Micro de Sobrancelha", desc: "É um procedimento que preenche e desenha as sobrancelhas com pigmento na pele, deixando elas mais definidas e harmônicas.", img: microSobrancelhaImg, price: "R$ 450", duration: "120 min" },
         { title: "Micro Labial", desc: "Cor e brilho labial com efeito 'tint', deixando os lábios com aspecto saudável.", img: lipsImg, price: "R$ 450", duration: "120 min" }
       ]
     },
