@@ -139,13 +139,13 @@ const Hero = () => {
 };
 
 const BannerTrust = () => {
-  const items = ["Cílios", "Sobrancelhas", "Micropigmentação", "Unhas", "Estética Facial", "Lash Lift"];
+  const items = ["Cílios", "Sobrancelhas", "Micropigmentação", "Unhas"];
   
   return (
     <div className="py-12 border-y border-white/5 bg-white/[0.02] marquee-container">
       <div className="marquee-content flex gap-20 items-center opacity-30">
-        {/* Renderiza duas vezes para o loop infinito sem cortes */}
-        {[...items, ...items].map((item, index) => (
+        {/* Renderiza quatro vezes para o loop infinito sem cortes em todas as resoluções */}
+        {[...items, ...items, ...items, ...items].map((item, index) => (
           <span key={index} className="font-serif italic text-3xl uppercase tracking-[0.2em] whitespace-nowrap">
             {item}
           </span>
