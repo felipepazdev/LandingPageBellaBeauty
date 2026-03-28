@@ -378,7 +378,7 @@ const Footer = () => {
 export default function App() {
   return (
     <main className="bg-vapor-night text-vapor-light perspective-1000 overflow-x-hidden">
-      <div className="noise-overlay" />
+
       <Navbar />
       <Hero />
       <BannerTrust />
