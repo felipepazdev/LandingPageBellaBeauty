@@ -284,7 +284,7 @@ const ServiceSection = () => {
       img: lipsImg, 
       price: "R$ 450",
       items: [
-        { title: "Aquarelle Lips", desc: "Cor e brilho labial com efeito 'tint', deixando os lábios com aspecto saudável.", img: lipsImg, price: "R$ 450", duration: "120 min" }
+        { title: "Micro Labial", desc: "Cor e brilho labial com efeito 'tint', deixando os lábios com aspecto saudável.", img: lipsImg, price: "R$ 450", duration: "120 min" }
       ]
     },
     { 
