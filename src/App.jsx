@@ -30,6 +30,7 @@ import nailsImg from './assets/nails.png';
 import volumeBrasileiroImg from './assets/volume-brasileiro.png';
 import volumeAmericanoImg from './assets/volume-americano.png';
 import foxEyesImg from './assets/fox-eyes.png';
+import lashLiftingImg from './assets/lash-lifting.png';
 import salaoRealImg from './assets/salao-real.jpg';
 import kellyImg from './assets/kelly.png';
 import nayaraImg from './assets/nayara.png';
@@ -273,6 +274,7 @@ const ServiceSection = () => {
         { title: "Volume Brasileiro", desc: "É o mais naturalzinho. A ideia é só deixar seus cílios mais cheios e definidos, como se você já acordasse arrumada todos os dias, sem parecer exagerado. É o que mais indicamos para quem vai fazer pela primeira vez.", img: volumeBrasileiroImg, price: "R$ 150", duration: "90 - 120 min" },
         { title: "Volume Americano", desc: "Tem um efeito mais moderno, com movimento nos cílios. Fica bonito tanto no dia a dia quanto quando você se arruma mais.", img: volumeAmericanoImg, price: "R$ 170", duration: "100 - 130 min" },
         { title: "Fox Eyes", desc: "Deixa o olhar mais alongado e levantado, dando aquele efeito mais sofisticado.", img: foxEyesImg, price: "R$ 180", duration: "100 - 130 min" },
+        { title: "Lash Lifting", desc: "É um procedimento que levanta e curva os cílios naturais desde a raiz, deixando eles mais visíveis e destacados, sem precisar de extensão.", img: lashLiftingImg, price: "R$ 110", duration: "60 - 80 min" },
         { title: "Fio a Fio Luxo", desc: "Clássico e atemporal, para quem busca naturalidade e elegância no olhar.", img: lashesImg, price: "R$ 130", duration: "90 min" }
       ]
     },
