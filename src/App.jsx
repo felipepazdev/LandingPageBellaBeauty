@@ -266,7 +266,7 @@ const ServiceSection = () => {
     { 
       category: "Extensão de Cílios", 
       desc: "Trabalhos de excelência em fios.", 
-      img: volumeBrasileiroImg, 
+      img: lashesImg, 
       price: "R$ 150",
       items: [
         { title: "Volume Brasileiro", desc: "Técnica que proporciona preenchimento e curvatura com fios tecnológicos em formato de Y.", img: volumeBrasileiroImg, price: "R$ 150", duration: "90 - 120 min" },
