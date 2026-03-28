@@ -17,7 +17,9 @@ import {
   Camera,
   PhoneCall,
   ArrowRight,
-  X
+  X,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
 // Ativos Originais
@@ -25,6 +27,7 @@ import lashesImg from './assets/lashes.png';
 import lipsImg from './assets/lips.png';
 import browsImg from './assets/brows.png';
 import nailsImg from './assets/nails.png';
+import volumeBrasileiroImg from './assets/volume-brasileiro.png';
 import salaoRealImg from './assets/salao-real.jpg';
 import kellyImg from './assets/kelly.png';
 import nayaraImg from './assets/nayara.png';
@@ -159,70 +162,94 @@ const BannerTrust = () => {
 };
 
 const ServiceModal = ({ service, onClose }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
   if (!service) return null;
+
+  const currentItem = service.items[currentIndex];
+
+  const handleNext = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % service.items.length);
+  };
+
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev - 1 + service.items.length) % service.items.length);
+  };
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md transition-all animate-in fade-in duration-300">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl transition-all animate-in fade-in duration-300" onClick={onClose}>
       <div 
-        className="bg-[#0D0D0D] border border-luxury-gold/30 w-full max-w-4xl rounded-[2rem] overflow-hidden relative shadow-[0_0_80px_rgba(0,0,0,0.5)] animate-in zoom-in-95 duration-500"
+        className="bg-[#0A0A0A] border border-luxury-gold/20 w-full max-w-5xl rounded-[3rem] overflow-hidden relative shadow-[0_0_100px_rgba(0,0,0,0.8)] animate-in zoom-in-95 duration-500"
         onClick={(e) => e.stopPropagation()}
       >
         <button 
           onClick={onClose}
-          className="absolute top-6 right-6 z-20 w-12 h-12 rounded-full bg-black/40 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold hover:scale-110 transition-all duration-300"
+          className="absolute top-8 right-8 z-30 w-12 h-12 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold hover:scale-110 transition-all duration-300"
         >
           <X className="w-6 h-6" />
         </button>
         
-        <div className="flex flex-col lg:flex-row min-h-[500px]">
-          {/* Lado da Imagem (Visual de Carrossel/Foco) */}
-          <div className="lg:w-1/2 h-64 lg:h-auto relative group overflow-hidden bg-black">
+        <div className="flex flex-col lg:flex-row min-h-[600px]">
+          {/* Lado da Imagem (Carrossel) */}
+          <div className="lg:w-3/5 relative group overflow-hidden bg-black h-[400px] lg:h-auto">
             <img 
-              src={service.img} 
-              alt={service.title} 
-              className="w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105" 
+              key={currentItem.img}
+              src={currentItem.img} 
+              alt={currentItem.title} 
+              className="w-full h-full object-cover animate-in fade-in zoom-in-105 duration-1000" 
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#0D0D0D] to-transparent pointer-events-none" />
             
-            <div className="absolute bottom-8 left-8 flex gap-2">
-              <div className="w-8 h-1 bg-luxury-gold rounded-full" />
-              <div className="w-2 h-1 bg-white/20 rounded-full" />
-              <div className="w-2 h-1 bg-white/20 rounded-full" />
+            {/* Controles do Carrossel */}
+            {service.items.length > 1 && (
+              <>
+                <button 
+                  onClick={handlePrev}
+                  className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-black/40 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold transition-all backdrop-blur-md opacity-0 group-hover:opacity-100"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button 
+                  onClick={handleNext}
+                  className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-black/40 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold transition-all backdrop-blur-md opacity-0 group-hover:opacity-100"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </>
+            )}
+
+            <div className="absolute bottom-10 left-10 flex gap-3 z-20">
+              {service.items.map((_, i) => (
+                <div 
+                  key={i} 
+                  className={`h-1.5 rounded-full transition-all duration-500 ${i === currentIndex ? 'w-12 bg-luxury-gold' : 'w-3 bg-white/20'}`} 
+                />
+              ))}
             </div>
           </div>
           
           {/* Lado do Conteúdo */}
-          <div className="lg:w-1/2 p-8 lg:p-14 flex flex-col justify-center space-y-8 bg-[#0D0D0D]">
-            <div className="space-y-3">
-              <span className="text-luxury-gold/60 text-xs font-mono uppercase tracking-[0.3em] font-medium block">Tratamento Premium</span>
-              <h3 className="text-5xl font-serif italic text-white leading-[1.1]">{service.title}</h3>
+          <div className="lg:w-2/5 p-10 lg:p-16 flex flex-col justify-center space-y-10 bg-[#0A0A0A]">
+            <div className="space-y-4">
+              <span className="text-luxury-gold/50 text-xs font-mono uppercase tracking-[0.4em] font-semibold block">Portfólio Detalhado</span>
+              <h3 key={currentItem.title} className="text-5xl font-serif italic text-white leading-[1.1] animate-in slide-in-from-left-4 duration-500">
+                {currentItem.title}
+              </h3>
             </div>
             
-            <p className="text-white/50 font-light leading-relaxed text-lg max-w-md italic font-serif">
-              "{service.desc}"
+            <p key={currentItem.desc} className="text-white/40 font-light leading-relaxed text-lg italic font-serif animate-in fade-in slide-in-from-bottom-2 duration-700 delay-100">
+              "{currentItem.desc}"
             </p>
 
-            <div className="space-y-6 pt-4 border-t border-white/5">
-              <div className="flex items-center gap-12">
-                <div className="space-y-1">
-                  <span className="text-[10px] text-white/30 uppercase font-mono tracking-[0.2em]">Investimento</span>
-                  <div className="text-4xl font-sans font-black text-luxury-gold">{service.price}</div>
-                </div>
-                <div className="space-y-1">
-                  <span className="text-[10px] text-white/30 uppercase font-mono tracking-[0.2em]">Duração Média</span>
-                  <div className="text-sm font-semibold text-white/80">60 - 90 min</div>
-                </div>
+            <div className="grid grid-cols-2 gap-8 pt-10 border-t border-white/5">
+              <div className="space-y-2">
+                <span className="text-[10px] text-white/30 uppercase font-mono tracking-[0.2em]">Investimento</span>
+                <div className="text-3xl font-sans font-black text-luxury-gold">{currentItem.price}</div>
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a 
-                  href="https://wa.me/5522998393529" 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="flex-1 bg-luxury-gold text-white px-10 py-5 rounded-2xl text-sm font-bold hover:brightness-110 hover:shadow-[0_10px_30px_rgba(197,160,40,0.3)] transition-all flex items-center justify-center gap-3 active:scale-95"
-                >
-                  RESERVAR AGORA
-                  <Zap className="w-4 h-4 fill-current" />
-                </a>
+              <div className="space-y-2">
+                <span className="text-[10px] text-white/30 uppercase font-mono tracking-[0.2em]">Duração Média</span>
+                <div className="text-base font-semibold text-white/80">{currentItem.duration}</div>
               </div>
             </div>
           </div>
@@ -236,42 +263,71 @@ const ServiceSection = () => {
   const [selectedService, setSelectedService] = useState(null);
 
   const services = [
-    { title: "Extensão de Cílios", desc: "Volume e curvatura impecáveis para um olhar marcante, adaptado ao seu formato de rosto.", img: lashesImg, price: "R$ 150" },
-    { title: "Micropigmentação", desc: "Cor e definição labial com efeito natural e duradouro, realçando sua beleza sem exageros.", img: lipsImg, price: "R$ 450" },
-    { title: "Design de Sobrancelhas", desc: "Harmonização facial completa com técnicas avançadas de mapeamento e visagismo.", img: browsImg, price: "R$ 60" },
-    { title: "Nail Design", desc: "Alongamento e arte que refletem sua personalidade com acabamento de alta joalheria.", img: nailsImg, price: "R$ 120" },
+    { 
+      category: "Extensão de Cílios", 
+      desc: "Trabalhos de excelência em fios.", 
+      img: volumeBrasileiroImg, 
+      price: "R$ 150",
+      items: [
+        { title: "Volume Brasileiro", desc: "Técnica que proporciona preenchimento e curvatura com fios tecnológicos em formato de Y.", img: volumeBrasileiroImg, price: "R$ 150", duration: "90 - 120 min" },
+        { title: "Fio a Fio Luxo", desc: "Clássico e atemporal, para quem busca naturalidade e elegância no olhar.", img: lashesImg, price: "R$ 130", duration: "90 min" }
+      ]
+    },
+    { 
+      category: "Micropigmentação", 
+      desc: "Lábios e sobrancelhas definidos.", 
+      img: lipsImg, 
+      price: "R$ 450",
+      items: [
+        { title: "Aquarelle Lips", desc: "Cor e brilho labial com efeito 'tint', deixando os lábios com aspecto saudável.", img: lipsImg, price: "R$ 450", duration: "120 min" }
+      ]
+    },
+    { 
+      category: "Design de Sobrancelhas", 
+      desc: "Moldura do rosto perfeita.", 
+      img: browsImg, 
+      price: "R$ 60",
+      items: [
+        { title: "Design Estratégico", desc: "Mapeamento facial completo para realçar seus pontos positivos.", img: browsImg, price: "R$ 60", duration: "40 min" }
+      ]
+    },
+    { 
+      category: "Nail Design", 
+      desc: "Unhas impecáveis por semanas.", 
+      img: nailsImg, 
+      price: "R$ 120",
+      items: [
+        { title: "Alongamento em Fibra", desc: "Alta resistência e naturalidade máxima para suas unhas.", img: nailsImg, price: "R$ 120", duration: "120 min" }
+      ]
+    },
   ];
 
   return (
     <section id="servicos" className="py-32 px-8">
       <div className="max-w-7xl mx-auto space-y-20">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 text-center md:text-left">
           <div className="space-y-4">
-            <h2 className="text-6xl italic">Tratamentos <br/> <span className="text-luxury-gold not-italic font-black tracking-tighter uppercase">Exclusivos</span></h2>
-            <p className="text-white/20 font-mono text-xs tracking-[0.4em] uppercase">Resultados de alto padrão</p>
+            <h2 className="text-7xl italic leading-none">Serviços <br/> <span className="text-luxury-gold not-italic font-black tracking-tighter uppercase">Especiais</span></h2>
+            <p className="text-white/20 font-mono text-xs tracking-[0.4em] uppercase">Excelência que você sente</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((s, i) => (
             <div key={i} className="group cursor-pointer" onClick={() => setSelectedService(s)}>
-              <div className="h-[28rem] glass-card mb-8 overflow-hidden rounded-[2.5rem] border-white/5 relative bg-white/[0.02]">
-                <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out opacity-80 group-hover:opacity-100" />
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent opacity-90" />
+              <div className="h-[26rem] glass-card mb-8 overflow-hidden rounded-[2.5rem] border-white/5 relative bg-white/[0.02]">
+                <img src={s.img} alt={s.category} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out opacity-80 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-80" />
                 
                 <div className="absolute bottom-8 left-8 right-8 flex items-center justify-between">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-mono tracking-[0.2em] text-luxury-gold/80 block uppercase">A partir de</span>
-                    <span className="text-xl font-black text-white">{s.price}</span>
+                    <span className="text-[10px] font-mono tracking-[0.2em] text-luxury-gold/80 block uppercase">Ver Portfólio</span>
+                    <span className="text-xl font-black text-white italic">{s.category}</span>
                   </div>
-                  <div className="w-14 h-14 rounded-full border border-luxury-gold/30 flex items-center justify-center backdrop-blur-md group-hover:bg-luxury-gold group-hover:border-transparent transition-all duration-500 group-hover:translate-x-1">
-                    <ArrowRight className="w-6 h-6 text-luxury-gold group-hover:text-white transition-colors" />
+                  <div className="w-12 h-12 rounded-full border border-luxury-gold/30 flex items-center justify-center backdrop-blur-md group-hover:bg-luxury-gold group-hover:border-transparent transition-all duration-500">
+                    <ArrowRight className="w-5 h-5 text-luxury-gold group-hover:text-white" />
                   </div>
                 </div>
-              </div>
-              <div className="space-y-3 px-2">
-                <h3 className="text-3xl italic tracking-tight font-serif text-white/90">{s.title}</h3>
-                <p className="text-sm text-white/40 font-light leading-relaxed line-clamp-2">{s.desc}</p>
               </div>
             </div>
           ))}
