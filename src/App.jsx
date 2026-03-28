@@ -32,6 +32,7 @@ import volumeAmericanoImg from './assets/volume-americano.png';
 import foxEyesImg from './assets/fox-eyes.png';
 import lashLiftingImg from './assets/lash-lifting.png';
 import microSobrancelhaImg from './assets/micro-sobrancelha.png';
+import designHennaImg from './assets/design-henna.png';
 import salaoRealImg from './assets/salao-real.jpg';
 import kellyImg from './assets/kelly.png';
 import nayaraImg from './assets/nayara.png';
@@ -295,6 +296,7 @@ const ServiceSection = () => {
       img: browsImg, 
       price: "R$ 60",
       items: [
+        { title: "Design com Henna", desc: "É um procedimento que modela os fios e preenche falhas com uma coloração temporária, deixando a sobrancelha mais definida e marcada.", img: designHennaImg, price: "R$ 80", duration: "50 min" },
         { title: "Design Estratégico", desc: "Mapeamento facial completo para realçar seus pontos positivos.", img: browsImg, price: "R$ 60", duration: "40 min" }
       ]
     },
