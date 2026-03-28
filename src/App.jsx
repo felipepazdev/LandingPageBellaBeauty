@@ -28,6 +28,7 @@ import lipsImg from './assets/lips.png';
 import browsImg from './assets/brows.png';
 import nailsImg from './assets/nails.png';
 import volumeBrasileiroImg from './assets/volume-brasileiro.png';
+import volumeAmericanoImg from './assets/volume-americano.png';
 import salaoRealImg from './assets/salao-real.jpg';
 import kellyImg from './assets/kelly.png';
 import nayaraImg from './assets/nayara.png';
@@ -179,9 +180,9 @@ const ServiceModal = ({ service, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl transition-all animate-in fade-in duration-300" onClick={onClose}>
+    <div className="absolute inset-0 z-[100] flex items-start justify-center p-4 bg-black/95 backdrop-blur-xl transition-all animate-in fade-in duration-300 pointer-events-auto" onClick={onClose}>
       <div 
-        className="bg-[#0A0A0A] border border-luxury-gold/20 w-full max-w-5xl rounded-[3rem] overflow-hidden relative shadow-[0_0_100px_rgba(0,0,0,0.8)] animate-in zoom-in-95 duration-500"
+        className="bg-[#0A0A0A] border border-luxury-gold/20 w-full max-w-5xl rounded-[3rem] overflow-hidden relative shadow-[0_0_100px_rgba(0,0,0,0.8)] animate-in zoom-in-95 duration-500 mt-20 mb-20"
         onClick={(e) => e.stopPropagation()}
       >
         <button 
@@ -261,7 +262,6 @@ const ServiceModal = ({ service, onClose }) => {
 
 const ServiceSection = () => {
   const [selectedService, setSelectedService] = useState(null);
-
   const services = [
     { 
       category: "Extensão de Cílios", 
@@ -269,7 +269,8 @@ const ServiceSection = () => {
       img: lashesImg, 
       price: "R$ 150",
       items: [
-        { title: "Volume Brasileiro", desc: "Técnica que proporciona preenchimento e curvatura com fios tecnológicos em formato de Y.", img: volumeBrasileiroImg, price: "R$ 150", duration: "90 - 120 min" },
+        { title: "Volume Brasileiro", desc: "É o mais naturalzinho. A ideia é só deixar seus cílios mais cheios e definidos, como se você já acordasse arrumada todos os dias, sem parecer exagerado. É o que mais indicamos para quem vai fazer pela primeira vez.", img: volumeBrasileiroImg, price: "R$ 150", duration: "90 - 120 min" },
+        { title: "Volume Americano", desc: "Tem um efeito mais moderno, com movimento nos cílios. Fica bonito tanto no dia a dia quanto quando você se arruma mais.", img: volumeAmericanoImg, price: "R$ 170", duration: "100 - 130 min" },
         { title: "Fio a Fio Luxo", desc: "Clássico e atemporal, para quem busca naturalidade e elegância no olhar.", img: lashesImg, price: "R$ 130", duration: "90 min" }
       ]
     },
@@ -303,7 +304,7 @@ const ServiceSection = () => {
   ];
 
   return (
-    <section id="servicos" className="py-32 px-8">
+    <section id="servicos" className="py-32 px-8 relative">
       <div className="max-w-7xl mx-auto space-y-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 text-center md:text-left">
           <div className="space-y-4">
@@ -339,8 +340,12 @@ const ServiceSection = () => {
         </div>
       </div>
 
+      {/* Modal renderizado dentro da seção com posição absoluta */}
       {selectedService && (
-        <ServiceModal service={selectedService} onClose={() => setSelectedService(null)} />
+        <ServiceModal 
+          service={selectedService} 
+          onClose={() => setSelectedService(null)} 
+        />
       )}
     </section>
   );
@@ -530,8 +535,7 @@ const Footer = () => {
 
 export default function App() {
   return (
-    <main className="bg-vapor-night text-vapor-light perspective-1000 overflow-x-hidden">
-
+    <main className="bg-vapor-night text-vapor-light perspective-1000 overflow-x-hidden relative">
       <Navbar />
       <Hero />
       <BannerTrust />
