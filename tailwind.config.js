@@ -7,10 +7,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        'vapor-night': '#0A0A14',
-        'vapor-accent': '#7B61FF',
-        'vapor-light': '#F0EFF4',
-        'vapor-card': '#18181B',
+        'luxury-black': '#0A0A0A',
+        'luxury-gold': '#C5A028',
+        'luxury-gold-light': '#E5C158',
+        'luxury-light': '#FDFDFD',
+        'luxury-card': '#111111',
+        // Fallbacks para as referências existentes
+        'vapor-night': '#0A0A0A',
+        'vapor-accent': '#C5A028',
+        'vapor-light': '#FDFDFD',
+        'vapor-card': '#111111',
       },
       fontFamily: {
         'sans': ['Sora', 'system-ui', 'sans-serif'],

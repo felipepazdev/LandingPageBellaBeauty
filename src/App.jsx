@@ -9,12 +9,14 @@ import {
   Scan, 
   Terminal,
   Calendar,
-  Camera,
-  PhoneCall,
-  ArrowRight,
   Star,
   CheckCircle2,
-  Heart
+  Heart,
+  Diamond,
+  Crown,
+  Camera,
+  PhoneCall,
+  ArrowRight
 } from 'lucide-react';
 
 // Ativos Originais
@@ -41,8 +43,8 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-500 ${scrolled ? 'bg-vapor-night/90 backdrop-blur-xl border-b border-white/5 py-3' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-vapor-accent flex items-center justify-center rotate-3 hover:rotate-0 transition-transform duration-500">
-            <Sparkles className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 rounded-xl bg-luxury-gold flex items-center justify-center rotate-3 hover:rotate-0 transition-transform duration-500 shadow-[0_0_20px_rgba(197,160,40,0.3)]">
+            <Crown className="w-5 h-5 text-luxury-black" />
           </div>
           <span className="font-serif italic text-2xl tracking-tighter text-white uppercase">Bella Beauty</span>
         </div>
@@ -117,8 +119,8 @@ const Hero = () => {
         </div>
         
         <div className="relative">
-          <div className="absolute -inset-10 bg-vapor-accent/20 blur-[120px] rounded-full opacity-30 animate-pulse" />
-          <div className="hero-image glass-card h-[600px] w-full relative z-10 border-white/5">
+          <div className="absolute -inset-10 bg-luxury-gold/10 blur-[150px] rounded-full opacity-20" />
+          <div className="hero-image glass-card h-[600px] w-full relative z-10 border-white/5 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
             <img src={salaoRealImg} alt="Bella Beauty Studio" className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700" />
             <div className="absolute bottom-8 right-8 p-6 glass-card bg-vapor-night/80 border-vapor-accent/30 flex items-center gap-4">
               <div className="w-10 h-10 rounded-full bg-vapor-accent flex items-center justify-center">
@@ -214,13 +216,13 @@ const PricingTable = () => {
           </div>
         </div>
 
-        <div className="glass-card p-12 bg-vapor-accent flex flex-col justify-between text-white relative overflow-hidden group">
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-[80px]" />
+        <div className="glass-card p-12 bg-white flex flex-col justify-between text-luxury-black relative overflow-hidden group">
+          <div className="absolute -top-20 -right-20 w-64 h-64 bg-luxury-gold/10 rounded-full blur-[80px]" />
           <div className="relative z-10 space-y-8">
-            <span className="text-[10px] font-mono tracking-widest uppercase bg-white/20 px-3 py-1 rounded-full">Destaque do Mês</span>
+            <span className="text-[10px] font-mono tracking-widest uppercase bg-luxury-gold text-white px-3 py-1 rounded-full">Destaque do Mês</span>
             <h3 className="text-5xl font-serif italic">Spa Day <br/> Bella Beauty</h3>
             <p className="font-light opacity-80">Pacote completo com Cílios + Design de Unhas + Revitalização Facial com Nayara & Kelly.</p>
-            <div className="text-6xl font-sans font-black">R$ 259,90</div>
+            <div className="text-6xl font-sans font-black text-luxury-gold">R$ 259,90</div>
             <ul className="space-y-3 opacity-90 text-sm">
               <li className="flex items-center gap-3"><CheckCircle2 className="w-4 h-4" /> Procedimentos rápidos e seguros</li>
               <li className="flex items-center gap-3"><CheckCircle2 className="w-4 h-4" /> Materiais premium certificados</li>
