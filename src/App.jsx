@@ -139,13 +139,17 @@ const Hero = () => {
 };
 
 const BannerTrust = () => {
+  const items = ["Cílios", "Sobrancelhas", "Micropigmentação", "Unhas", "Estética Facial", "Lash Lift"];
+  
   return (
-    <div className="py-12 border-y border-white/5 bg-white/[0.02]">
-      <div className="max-w-7xl mx-auto px-8 flex flex-wrap justify-between gap-12 items-center opacity-40">
-        <span className="font-serif italic text-2xl uppercase tracking-[0.2em]">Cílios</span>
-        <span className="font-serif italic text-2xl uppercase tracking-[0.2em]">Sobrancelhas</span>
-        <span className="font-serif italic text-2xl uppercase tracking-[0.2em]">Micropigmentação</span>
-        <span className="font-serif italic text-2xl uppercase tracking-[0.2em]">Unhas</span>
+    <div className="py-12 border-y border-white/5 bg-white/[0.02] marquee-container">
+      <div className="marquee-content flex gap-20 items-center opacity-30">
+        {/* Renderiza duas vezes para o loop infinito sem cortes */}
+        {[...items, ...items].map((item, index) => (
+          <span key={index} className="font-serif italic text-3xl uppercase tracking-[0.2em] whitespace-nowrap">
+            {item}
+          </span>
+        ))}
       </div>
     </div>
   );

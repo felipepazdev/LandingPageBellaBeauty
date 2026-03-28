@@ -49,3 +49,16 @@
 .preserve-3d {
   transform-style: preserve-3d;
 }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-container {
+  @apply overflow-hidden whitespace-nowrap;
+}
+
+.marquee-content {
+  @apply inline-block animate-[marquee_30s_linear_infinite] py-4;
+}
