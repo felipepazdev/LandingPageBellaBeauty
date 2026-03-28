@@ -319,15 +319,20 @@ const ServiceSection = () => {
                 <img src={s.img} alt={s.category} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out opacity-80 group-hover:opacity-100" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-80" />
                 
-                <div className="absolute bottom-8 left-8 right-8 flex items-center justify-between">
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-mono tracking-[0.2em] text-luxury-gold/80 block uppercase">Ver Portfólio</span>
-                    <span className="text-xl font-black text-white italic">{s.category}</span>
-                  </div>
-                  <div className="w-12 h-12 rounded-full border border-luxury-gold/30 flex items-center justify-center backdrop-blur-md group-hover:bg-luxury-gold group-hover:border-transparent transition-all duration-500">
-                    <ArrowRight className="w-5 h-5 text-luxury-gold group-hover:text-white" />
+                <div className="absolute bottom-10 left-0 right-0 flex flex-col items-center justify-center gap-4">
+                  <span className="text-[10px] font-mono tracking-[0.4em] text-luxury-gold block uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500">Ver Portfólio</span>
+                  <div className="w-14 h-14 rounded-full border border-luxury-gold/30 flex items-center justify-center backdrop-blur-md group-hover:bg-luxury-gold group-hover:border-transparent transition-all duration-500 scale-90 group-hover:scale-100">
+                    <ArrowRight className="w-6 h-6 text-luxury-gold group-hover:text-white" />
                   </div>
                 </div>
+              </div>
+              
+              {/* Texto abaixo do card */}
+              <div className="text-center space-y-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                <h3 className="text-3xl italic font-serif text-white/90 tracking-tight lowercase first-letter:uppercase">
+                  {s.category}
+                </h3>
+                <div className="w-8 h-[1px] bg-luxury-gold/30 mx-auto group-hover:w-16 transition-all duration-700" />
               </div>
             </div>
           ))}
