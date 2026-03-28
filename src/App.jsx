@@ -22,7 +22,7 @@ import lashesImg from './assets/lashes.png';
 import lipsImg from './assets/lips.png';
 import browsImg from './assets/brows.png';
 import nailsImg from './assets/nails.png';
-import heroImg from './assets/hero.png';
+import salaoRealImg from './assets/salao-real.jpg';
 import kellyImg from './assets/kelly.png';
 import nayaraImg from './assets/nayara.png';
 
@@ -94,8 +94,8 @@ const Hero = () => {
             <div className="w-1.5 h-1.5 rounded-full bg-vapor-accent animate-pulse" />
             Studio Premium em Jaconé
           </div>
-          <h1 className="text-7xl md:text-9xl leading-[0.9] font-serif italic text-white">
-            Beauty <br/> <span className="text-vapor-accent not-italic font-sans font-black uppercase">Studio</span>
+          <h1 className="text-7xl md:text-9xl leading-[0.9] font-serif italic text-white text-center">
+            Bella <br/> <span className="text-vapor-accent not-italic font-sans font-black uppercase">Beauty Studio</span>
           </h1>
           <p className="text-lg text-vapor-light/50 max-w-md font-light leading-relaxed">
             Especialistas em realçar sua beleza natural com o equilíbrio perfeito entre arte e tecnologia. Onde cada detalhe é uma assinatura de perfeição.
@@ -119,7 +119,7 @@ const Hero = () => {
         <div className="relative">
           <div className="absolute -inset-10 bg-vapor-accent/20 blur-[120px] rounded-full opacity-30 animate-pulse" />
           <div className="hero-image glass-card h-[600px] w-full relative z-10 border-white/5">
-            <img src={heroImg} alt="Beauty Studio" className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700" />
+            <img src={salaoRealImg} alt="Bella Beauty Studio" className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700" />
             <div className="absolute bottom-8 right-8 p-6 glass-card bg-vapor-night/80 border-vapor-accent/30 flex items-center gap-4">
               <div className="w-10 h-10 rounded-full bg-vapor-accent flex items-center justify-center">
                 <Star className="w-5 h-5 text-white fill-white" />
