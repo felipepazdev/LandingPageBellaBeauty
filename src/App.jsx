@@ -234,7 +234,7 @@ const ServiceModal = ({ service, onClose }) => {
           <div className="lg:w-2/5 p-10 lg:p-16 flex flex-col justify-center space-y-10 bg-[#0A0A0A]">
             <div className="space-y-4">
               <span className="text-luxury-gold/50 text-xs font-mono uppercase tracking-[0.4em] font-semibold block">Portfólio Detalhado</span>
-              <h3 key={currentItem.title} className="text-5xl font-serif italic text-white leading-[1.1] animate-in slide-in-from-left-4 duration-500">
+              <h3 key={currentItem.title} className="text-4xl lg:text-5xl lg:whitespace-nowrap font-serif italic text-white leading-[1.1] animate-in slide-in-from-left-4 duration-500">
                 {currentItem.title}
               </h3>
             </div>
