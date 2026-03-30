@@ -595,15 +595,26 @@ const CoursePage = () => {
       <section className="py-32 px-8 bg-luxury-gold">
         <div className="max-w-4xl mx-auto text-center space-y-12 text-luxury-black">
           <h2 className="text-6xl md:text-8xl italic font-serif leading-none">Transforme sua <br/> <span className="font-black not-italic uppercase tracking-tighter">Carreira Hoje</span></h2>
-          <div className="space-y-2">
-            <p className="text-luxury-black/60 font-mono text-sm uppercase tracking-widest">Investimento na sua profissão ({courseType})</p>
-            <div className="text-7xl font-sans font-black tracking-tighter">R$ {price}</div>
-            <p className="text-luxury-black/40 text-xs italic font-serif">Dividido em até 10x no cartão</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch pt-4">
+            <div className="glass-card-dark bg-luxury-black/5 border-luxury-black/10 p-10 rounded-cinema space-y-4 flex flex-col justify-center">
+              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-luxury-black/60">Modalidade Presencial</span>
+              <div className="text-6xl font-sans font-black tracking-tighter text-luxury-black">R$ 1.290</div>
+              <p className="text-xs italic text-luxury-black/40 font-serif lowercase first-letter:uppercase">4 dias de prática intensiva com modelos reais</p>
+            </div>
+
+            <div className="glass-card-dark bg-luxury-black/5 border-luxury-black/10 p-10 rounded-cinema space-y-4 flex flex-col justify-center">
+              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-luxury-black/60">Modalidade Online</span>
+              <div className="text-6xl font-sans font-black tracking-tighter text-luxury-black">R$ 903</div>
+              <p className="text-xs italic text-luxury-black/40 font-serif lowercase first-letter:uppercase">Acesso vitalício, aulas em HD e suporte remoto</p>
+            </div>
           </div>
-          <div className="pt-8">
-            <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="bg-luxury-black text-white px-16 py-6 rounded-full font-bold hover:scale-105 transition-all text-sm uppercase tracking-[0.2em]">
+
+          <div className="pt-8 space-y-4">
+            <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="inline-block bg-luxury-black text-white px-20 py-6 rounded-full font-bold hover:scale-105 transition-all text-sm uppercase tracking-[0.2em] shadow-xl shadow-black/20">
               Falar com Consultor
             </a>
+            <p className="text-luxury-black/40 text-xs italic font-serif">Dividido em até 10x em ambas as modalidades</p>
           </div>
         </div>
       </section>
