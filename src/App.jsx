@@ -125,6 +125,19 @@ const BannerTrust = () => {
 };
 
 const Contact = () => {
+  const [formData, setFormData] = useState({ name: '', service: '', whatsapp: '' });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const message = `Olá Bella Beauty! Me chamo ${formData.name}. Gostaria de uma avaliação sobre ${formData.service}. Meu WhatsApp para contato é ${formData.whatsapp}.`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/5521975683691?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
+    setIsSubmitted(true);
+  };
+
   return (
     <section id="contato" className="py-32 px-8 bg-black relative overflow-hidden">
        <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
@@ -168,14 +181,62 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="glass-card p-8 md:p-12 bg-vapor-night/50 border-white/5 space-y-8">
-           <h3 className="text-2xl font-serif italic">Dúvidas ou Pré-Avaliação?</h3>
-           <p className="text-sm text-white/40 font-light">Mande uma mensagem e nossa equipe retornará em instantes.</p>
-           <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); window.open(WZ_URL, '_blank'); }}>
-              <input type="text" placeholder="Seu Nome" className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-vapor-accent transition-colors text-sm" />
-              <input type="text" placeholder="Serviço de Interesse" className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-vapor-accent transition-colors text-sm" />
-              <button type="submit" className="w-full btn-primary justify-center py-6 text-sm uppercase tracking-widest">Enviar Mensagem</button>
-           </form>
+        <div className="glass-card p-8 md:p-12 bg-vapor-night/50 border-white/5 space-y-8 min-h-[400px] flex flex-col justify-center">
+           {!isSubmitted ? (
+             <>
+               <h3 className="text-2xl font-serif italic">Dúvidas ou Pré-Avaliação?</h3>
+               <p className="text-sm text-white/40 font-light">Mande uma mensagem e nossa equipe retornará em instantes.</p>
+               <form className="space-y-6" onSubmit={handleSubmit}>
+                  <input 
+                    required
+                    type="text" 
+                    placeholder="Seu Nome" 
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-vapor-accent transition-colors text-sm" 
+                  />
+                  <input 
+                    required
+                    type="text" 
+                    placeholder="WhatsApp (Ex: 21 99999-9999)" 
+                    value={formData.whatsapp}
+                    onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-vapor-accent transition-colors text-sm" 
+                  />
+                  <input 
+                    required
+                    type="text" 
+                    placeholder="Serviço de Interesse" 
+                    value={formData.service}
+                    onChange={(e) => setFormData({...formData, service: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-vapor-accent transition-colors text-sm" 
+                  />
+                  <button type="submit" className="w-full btn-primary justify-center py-6 text-sm uppercase tracking-widest group">
+                    Enviar Mensagem
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+               </form>
+             </>
+           ) : (
+             <div className="text-center space-y-6 animate-in fade-in zoom-in duration-500">
+                <div className="w-20 h-20 bg-vapor-accent/20 rounded-full flex items-center justify-center mx-auto border border-vapor-accent/30">
+                  <CheckCircle2 className="w-10 h-10 text-vapor-accent animate-bounce" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-3xl font-serif italic text-white">Mensagem Enviada!</h3>
+                  <p className="text-vapor-light/40 leading-relaxed">
+                    Mensagem enviada com sucesso para nossa equipe através do WhatsApp. <br/> 
+                    <span className="text-vapor-accent font-medium">Em breve entraremos em contato.</span>
+                  </p>
+                </div>
+                <button 
+                  onClick={() => setIsSubmitted(false)}
+                  className="text-xs font-mono text-white/20 uppercase tracking-widest hover:text-vapor-accent transition-colors"
+                >
+                  Enviar outra mensagem
+                </button>
+             </div>
+           )}
         </div>
       </div>
     </section>
