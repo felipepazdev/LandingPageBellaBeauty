@@ -208,7 +208,11 @@ const Footer = () => {
           <div className="space-y-6">
             <h4 className="text-xs font-mono text-vapor-accent uppercase tracking-[0.3em]">Links</h4>
             <ul className="space-y-4 text-sm text-white/50 font-light">
-              <li className="flex items-center gap-2 cursor-pointer hover:text-vapor-accent"><Camera className="w-4 h-4" /> Instagram</li>
+              <li>
+                <a href="https://www.instagram.com/bellabeauty.saquarema/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-vapor-accent transition-all">
+                  <Camera className="w-4 h-4" /> Instagram
+                </a>
+              </li>
               <li><a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-vapor-accent"><PhoneCall className="w-4 h-4" /> WhatsApp</a></li>
             </ul>
           </div>
@@ -420,6 +424,11 @@ const Specialists = () => {
                 <span className="text-[10px] font-mono text-vapor-accent tracking-[0.3em] uppercase">{e.r}</span>
                 <h3 className="text-4xl italic text-white">{e.n}</h3>
                 <p className="text-sm text-vapor-light/40 font-light leading-relaxed">{e.desc}</p>
+                <div className="flex justify-center md:justify-start gap-4 pt-2">
+                   <a href="https://www.instagram.com/bellabeauty.saquarema/" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-vapor-accent transition-colors">
+                     <Camera className="w-5 h-5" />
+                   </a>
+                </div>
               </div>
             </div>
           ))}
