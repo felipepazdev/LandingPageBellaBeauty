@@ -592,29 +592,45 @@ const CoursePage = () => {
         </div>
       </section>
 
-      <section className="py-32 px-8 bg-luxury-gold">
-        <div className="max-w-4xl mx-auto text-center space-y-12 text-luxury-black">
-          <h2 className="text-6xl md:text-8xl italic font-serif leading-none">Transforme sua <br/> <span className="font-black not-italic uppercase tracking-tighter">Carreira Hoje</span></h2>
+      <section className="py-32 px-8 bg-black relative">
+        <div className="absolute inset-0 bg-luxury-gold/5 opacity-10 pointer-events-none" />
+        <div className="max-w-5xl mx-auto text-center space-y-16 relative z-10">
+          <div className="space-y-4">
+             <span className="text-luxury-gold font-mono text-xs uppercase tracking-[0.4em] animate-pulse">Inicie sua Jornada</span>
+             <h2 className="text-6xl md:text-8xl italic font-serif leading-none uppercase">Transforme sua <br/> <span className="text-luxury-gold not-italic font-black">Carreira Hoje</span></h2>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch pt-4">
-            <div className="glass-card-dark bg-luxury-black/5 border-luxury-black/10 p-10 rounded-cinema space-y-4 flex flex-col justify-center">
-              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-luxury-black/60">Modalidade Presencial</span>
-              <div className="text-6xl font-sans font-black tracking-tighter text-luxury-black">R$ 1.290</div>
-              <p className="text-xs italic text-luxury-black/40 font-serif lowercase first-letter:uppercase">4 dias de prática intensiva com modelos reais</p>
+            <div className="glass-card bg-white/[0.03] border-white/10 p-12 rounded-cinema space-y-6 hover:border-luxury-gold/40 transition-all group text-center flex flex-col justify-between">
+              <div className="space-y-6">
+                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 group-hover:text-luxury-gold transition-colors">Modalidade Presencial</span>
+                <div className="text-7xl font-sans font-black tracking-tighter text-white">R$ 1.290</div>
+                <p className="text-sm italic text-white/40 font-serif lowercase first-letter:uppercase leading-relaxed">Mentoria presencial individual ou em grupo <br/> com prática direta em modelos reais.</p>
+              </div>
+              <div className="pt-10">
+                 <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="w-full btn-primary justify-center text-[10px] uppercase tracking-widest py-6 shadow-2xl shadow-luxury-gold/20">
+                    Garantir Presencial
+                 </a>
+              </div>
             </div>
 
-            <div className="glass-card-dark bg-luxury-black/5 border-luxury-black/10 p-10 rounded-cinema space-y-4 flex flex-col justify-center">
-              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-luxury-black/60">Modalidade Online</span>
-              <div className="text-6xl font-sans font-black tracking-tighter text-luxury-black">R$ 903</div>
-              <p className="text-xs italic text-luxury-black/40 font-serif lowercase first-letter:uppercase">Acesso vitalício, aulas em HD e suporte remoto</p>
+            <div className="glass-card bg-white/[0.03] border-white/10 p-12 rounded-cinema space-y-6 hover:border-luxury-gold/40 transition-all group text-center flex flex-col justify-between">
+              <div className="space-y-6">
+                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 group-hover:text-luxury-gold transition-colors">Modalidade Online</span>
+                <div className="text-7xl font-sans font-black tracking-tighter text-white">R$ 903</div>
+                <p className="text-sm italic text-white/40 font-serif lowercase first-letter:uppercase leading-relaxed">Formação completa em vídeo HD com <br/> acesso vitalício e suporte via WhatsApp.</p>
+              </div>
+              <div className="pt-10">
+                 <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center bg-white/10 text-white border border-white/20 p-6 rounded-full font-bold hover:bg-white hover:text-black transition-all text-[10px] uppercase tracking-widest">
+                    Garantir Online
+                 </a>
+              </div>
             </div>
           </div>
 
           <div className="pt-8 space-y-4">
-            <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="inline-block bg-luxury-black text-white px-20 py-6 rounded-full font-bold hover:scale-105 transition-all text-sm uppercase tracking-[0.2em] shadow-xl shadow-black/20">
-              Falar com Consultor
-            </a>
-            <p className="text-luxury-black/40 text-xs italic font-serif">Dividido em até 10x em ambas as modalidades</p>
+            <p className="text-white/20 font-mono text-[10px] uppercase tracking-widest">Ambas as modalidades incluem certificado exclusivo Bella Beauty</p>
+            <p className="text-luxury-gold/60 text-xs italic font-serif">Dividido em até 10x em todos os cartões de crédito</p>
           </div>
         </div>
       </section>
