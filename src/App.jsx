@@ -502,12 +502,16 @@ const Specialists = () => {
 // Página de Curso
 const CoursePage = () => {
   const containerRef = useRef(null);
+  const [courseType, setCourseType] = useState('presencial'); // 'presencial' ou 'online'
+  
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".course-hero > *", { y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out" });
     }, containerRef);
     return () => ctx.revert();
   }, []);
+
+  const price = courseType === 'presencial' ? '1.290' : '903';
 
   return (
     <div ref={containerRef} className="pt-20">
@@ -521,8 +525,27 @@ const CoursePage = () => {
             Curso de <span className="text-luxury-gold not-italic font-sans font-black">Cílios</span>
           </h1>
           <p className="text-xl text-vapor-light/50 max-w-2xl mx-auto font-light leading-relaxed">
-            Domine a arte da extensão de cílios com o método Bella Beauty. Do zero ao profissional em 4 dias intensivos de prática real.
+            Domine a arte da extensão de cílios com o método Bella Beauty. Do zero ao profissional com prática real ou no conforto da sua casa.
           </p>
+          
+          {/* Seletor de Modalidade */}
+          <div className="flex justify-center pt-4">
+            <div className="bg-white/5 p-1.5 rounded-full border border-white/10 flex items-center gap-2">
+              <button 
+                onClick={() => setCourseType('presencial')}
+                className={`px-8 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-widest transition-all duration-500 ${courseType === 'presencial' ? 'bg-luxury-gold text-luxury-black font-bold shadow-lg shadow-luxury-gold/20' : 'text-white/40 hover:text-white'}`}
+              >
+                Presencial
+              </button>
+              <button 
+                onClick={() => setCourseType('online')}
+                className={`px-8 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-widest transition-all duration-500 ${courseType === 'online' ? 'bg-luxury-gold text-luxury-black font-bold shadow-lg shadow-luxury-gold/20' : 'text-white/40 hover:text-white'}`}
+              >
+                Online
+              </button>
+            </div>
+          </div>
+
           <div className="flex justify-center pt-8">
             <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="btn-primary uppercase text-xs tracking-widest px-12 py-6">
               Quero me inscrever agora
@@ -537,7 +560,7 @@ const CoursePage = () => {
           {[
             { icon: <BookOpen className="w-8 h-8"/>, title: "Teoria Avançada", desc: "Ciclo biológico, química de adesivos e saúde ocular." },
             { icon: <Zap className="w-8 h-8"/>, title: "Método Exclusivo", desc: "Técnicas de agilidade e retenção prolongada." },
-            { icon: <Users className="w-8 h-8"/>, title: "Aulas Práticas", desc: "Prática em modelos reais com supervisão direta." },
+            { icon: <Users className="w-8 h-8"/>, title: courseType === 'presencial' ? "Aulas Práticas" : "Aulas Gravadas HD", desc: courseType === 'presencial' ? "Prática em modelos reais com supervisão direta." : "Acesso vitalício ao conteúdo em alta definição." },
             { icon: <Award className="w-8 h-8"/>, title: "Certificação", desc: "Certificado reconhecido para atuar no mercado." },
           ].map((item, i) => (
             <div key={i} className="glass-card p-10 space-y-6 hover:border-luxury-gold/40 transition-all group">
@@ -573,8 +596,8 @@ const CoursePage = () => {
         <div className="max-w-4xl mx-auto text-center space-y-12 text-luxury-black">
           <h2 className="text-6xl md:text-8xl italic font-serif leading-none">Transforme sua <br/> <span className="font-black not-italic uppercase tracking-tighter">Carreira Hoje</span></h2>
           <div className="space-y-2">
-            <p className="text-luxury-black/60 font-mono text-sm uppercase tracking-widest">Investimento na sua profissão</p>
-            <div className="text-7xl font-sans font-black tracking-tighter">R$ 1.290</div>
+            <p className="text-luxury-black/60 font-mono text-sm uppercase tracking-widest">Investimento na sua profissão ({courseType})</p>
+            <div className="text-7xl font-sans font-black tracking-tighter">R$ {price}</div>
             <p className="text-luxury-black/40 text-xs italic font-serif">Dividido em até 10x no cartão</p>
           </div>
           <div className="pt-8">
