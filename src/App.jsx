@@ -722,9 +722,12 @@ const CoursePage = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch pt-4">
             <div className="glass-card bg-white/[0.03] border-white/10 p-12 rounded-cinema space-y-6 hover:border-luxury-gold/40 transition-all group text-center flex flex-col justify-between">
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 group-hover:text-luxury-gold transition-colors">Modalidade Presencial</span>
-                <div className="text-7xl font-sans font-black tracking-tighter text-white">R$ 1.290</div>
+                <div className="space-y-2">
+                  <div className="text-7xl font-sans font-black tracking-tighter text-white">R$ 1.290</div>
+                  <div className="text-[10px] text-luxury-gold font-mono tracking-[0.2em] font-bold">EM ATÉ 6X SEM JUROS</div>
+                </div>
                 <p className="text-sm italic text-white/40 font-serif lowercase first-letter:uppercase leading-relaxed">Mentoria presencial individual ou em grupo <br/> com prática direta em modelos reais.</p>
               </div>
               <div className="pt-10">
@@ -735,9 +738,12 @@ const CoursePage = () => {
             </div>
 
             <div className="glass-card bg-white/[0.03] border-white/10 p-12 rounded-cinema space-y-6 hover:border-luxury-gold/40 transition-all group text-center flex flex-col justify-between">
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 group-hover:text-luxury-gold transition-colors">Modalidade Online</span>
-                <div className="text-7xl font-sans font-black tracking-tighter text-white">R$ 903</div>
+                <div className="space-y-2">
+                  <div className="text-7xl font-sans font-black tracking-tighter text-white">R$ 903</div>
+                  <div className="text-[10px] text-luxury-gold font-mono tracking-[0.2em] font-bold">EM ATÉ 6X SEM JUROS</div>
+                </div>
                 <p className="text-sm italic text-white/40 font-serif lowercase first-letter:uppercase leading-relaxed">Formação completa em vídeo HD com <br/> acesso vitalício e suporte via WhatsApp.</p>
               </div>
               <div className="pt-10">
@@ -748,9 +754,12 @@ const CoursePage = () => {
             </div>
           </div>
 
-          <div className="pt-8 space-y-4">
-            <p className="text-white/20 font-mono text-[10px] uppercase tracking-widest">Ambas as modalidades incluem certificado exclusivo Bella Beauty</p>
-            <p className="text-luxury-gold/60 text-xs italic font-serif">Dividido em até 10x em todos os cartões de crédito</p>
+          <div className="pt-8 space-y-8 flex flex-col items-center">
+            <div className="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-luxury-gold/10 border border-luxury-gold/20 text-luxury-gold shadow-lg shadow-luxury-gold/5 animate-pulse">
+              <Award className="w-4 h-4" />
+              <span className="text-[10px] font-mono uppercase tracking-[0.3em] font-bold">Certificado Profissional Incluso</span>
+            </div>
+            <p className="text-white/20 text-[10px] font-mono uppercase tracking-[0.2em]">Condições especiais válidas em todos os cartões de crédito</p>
           </div>
         </div>
       </section>
