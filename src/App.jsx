@@ -581,66 +581,106 @@ const ServicePolicies = () => {
   const policies = [
     {
       title: "Atrasos",
+      icon: <Clock className="w-6 h-6" />,
+      highlight: "Tolerância: 10 min",
       items: [
-        "Tolerância máxima de 10 minutos.",
+        "A tolerância máxima para atrasos é de 10 minutos.",
         "Após esse período, o atendimento poderá ser reduzido ou reagendado.",
         "Em caso de reagendamento por atraso, será cobrada uma taxa de 30% do valor do procedimento (art. 395 do Código Civil)."
       ]
     },
     {
       title: "Faltas sem aviso",
+      icon: <Calendar className="w-6 h-6" />,
+      highlight: "Falta Injustificada",
       items: [
         "O não comparecimento sem aviso prévio é considerado falta injustificada.",
-        "Para novo agendamento, será necessário o pagamento antecipado de 50% do valor do procedimento."
+        "Para realizar um novo agendamento, será necessário o pagamento antecipado de 50% do valor do procedimento."
       ]
     },
     {
-      title: "Cancelamentos e Reagendamentos",
+      title: "Cancelamentos",
+      icon: <X className="w-6 h-6" />,
+      highlight: "24h de antecedência",
       items: [
-        "Devem ser comunicados com mínimo de 24 horas de antecedência.",
+        "Devem ser comunicados com o mínimo de 24 horas de antecedência.",
         "Cancelamentos fora desse prazo serão tratados como falta injustificada."
-      ]
-    },
-    {
-      title: "Nosso Compromisso",
-      items: [
-        "Cada horário é reservado exclusivamente para você.",
-        "Garantimos um atendimento com qualidade, dedicação e ambiente confortável.",
-        "Utilizamos materiais esterilizados e descartáveis, assegurando total higiene e segurança.",
-        "Oferecemos cada serviço personalizado, para valorizar a beleza de cada olhar de forma única.",
-        "Criamos uma experiência acolhedora, com conforto térmico, bebidas quentinhas e atendimento humanizado, para que você se sinta cuidada do início ao fim."
       ]
     }
   ];
 
   return (
-    <section id="politicas" className="py-32 px-8 bg-black/40">
-      <div className="max-w-4xl mx-auto glass-card p-12 md:p-20 border-white/5 relative overflow-hidden group">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[2px] bg-luxury-gold/50" />
-        <div className="text-center space-y-16">
-          <div className="space-y-4">
-             <h2 className="text-4xl md:text-5xl font-serif italic text-white uppercase tracking-tighter">Políticas de Atendimento</h2>
-             <div className="w-12 h-[1px] bg-luxury-gold mx-auto" />
-          </div>
+    <section id="politicas" className="py-40 px-8 bg-black relative">
+      <div className="absolute inset-0 bg-luxury-gold/[0.02] pointer-events-none" />
+      <div className="max-w-7xl mx-auto space-y-24">
+        <div className="text-center space-y-4">
+           <span className="text-[10px] font-mono text-luxury-gold tracking-[0.5em] uppercase">Protocolos & Ética</span>
+           <h2 className="text-6xl md:text-8xl italic font-serif text-white tracking-tighter uppercase">
+              Políticas de <span className="text-luxury-gold font-sans font-black not-italic">Atendimento</span>
+           </h2>
+           <div className="w-24 h-[1px] bg-luxury-gold/30 mx-auto mt-8" />
+        </div>
 
-          <div className="space-y-20 text-left">
-            {policies.map((p, i) => (
-              <div key={i} className="space-y-8 group/item">
-                <div className="flex items-center gap-4">
-                  <div className="w-8 h-[1px] bg-luxury-gold/30 group-hover/item:w-12 transition-all" />
-                  <h3 className="text-2xl md:text-3xl font-serif italic text-white/90">{p.title}</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {policies.map((p, i) => (
+            <div key={i} className="glass-card p-10 border-white/5 hover:border-luxury-gold/40 transition-all group relative overflow-hidden flex flex-col">
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-luxury-gold/5 blur-[50px] group-hover:bg-luxury-gold/10 transition-all" />
+              <div className="space-y-8 relative z-10 flex-grow">
+                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-luxury-gold group-hover:scale-110 group-hover:bg-luxury-gold group-hover:text-black transition-all duration-500">
+                  {p.icon}
                 </div>
-                <ul className="space-y-4 pl-12">
+                <div className="space-y-4">
+                  <h3 className="text-3xl italic text-white/90 uppercase tracking-tighter leading-none">{p.title}</h3>
+                  <div className="inline-block px-3 py-1 rounded-full bg-luxury-gold/10 border border-luxury-gold/20 text-luxury-gold text-[9px] font-mono uppercase tracking-[0.2em]">
+                    {p.highlight}
+                  </div>
+                </div>
+                <ul className="space-y-4 pt-4 border-t border-white/5">
                   {p.items.map((item, idx) => (
-                    <li key={idx} className="flex gap-4 items-start text-sm text-white/50 font-light leading-relaxed">
-                      <div className="w-1.5 h-1.5 rounded-full bg-luxury-gold/40 mt-2 shrink-0" />
+                    <li key={idx} className="flex gap-4 items-start text-xs text-white/40 font-light leading-relaxed group-hover:text-white/70 transition-colors">
+                      <div className="w-1 h-1 rounded-full bg-luxury-gold mt-1.5 shrink-0 shadow-[0_0_5px_rgba(197,160,40,0.5)]" />
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Nosso Compromisso - Highlighted Banner */}
+        <div className="glass-card p-10 md:p-20 border-luxury-gold/20 bg-luxury-gold/[0.03] relative overflow-hidden rounded-[3rem]">
+           <div className="absolute top-0 right-0 p-12 opacity-[0.03] pointer-events-none">
+              <Heart className="w-[400px] h-[400px] text-luxury-gold" />
+           </div>
+           
+           <div className="max-w-5xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <div className="space-y-10">
+                 <h3 className="text-6xl md:text-7xl italic font-serif text-white leading-none uppercase">Nosso <br/> <span className="text-luxury-gold font-sans font-black not-italic">Compromisso</span></h3>
+                 <div className="w-16 h-[2px] bg-luxury-gold" />
+                 <p className="text-xl text-white/60 italic font-serif leading-relaxed font-light">
+                   "Cada horário é reservado exclusivamente para você. Garantimos um atendimento com qualidade, dedicação e ambiente confortável."
+                 </p>
+              </div>
+              
+              <div className="grid grid-cols-1 gap-8">
+                 {[
+                   { t: "Segurança Impecável", d: "Utilizamos materiais esterilizados e descartáveis, assegurando total higiene." },
+                   { t: "Beleza de Cada Olhar", d: "Serviço personalizado para valorizar sua beleza de forma única." },
+                   { t: "Experiência Acolhedora", d: "Conforto térmico, bebidas quentinhas e atendimento humanizado." }
+                 ].map((item, idx) => (
+                   <div key={idx} className="flex gap-8 items-center group/item p-6 rounded-2xl hover:bg-white/[0.02] transition-colors">
+                      <div className="w-12 h-12 rounded-full border border-luxury-gold/30 flex items-center justify-center text-luxury-gold font-mono text-xs group-hover/item:bg-luxury-gold group-hover/item:text-black transition-all duration-500 shrink-0 font-bold">
+                        0{idx + 1}
+                      </div>
+                      <div className="space-y-1">
+                        <h4 className="text-white font-bold text-sm uppercase tracking-[0.2em]">{item.t}</h4>
+                        <p className="text-white/30 text-xs font-light leading-relaxed group-hover:text-white/50 transition-colors">{item.d}</p>
+                      </div>
+                   </div>
+                 ))}
+              </div>
+           </div>
         </div>
       </div>
     </section>
