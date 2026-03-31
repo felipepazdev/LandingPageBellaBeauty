@@ -780,16 +780,16 @@ const NayaraTrajectory = () => {
                className={`absolute inset-0 transition-all duration-[2000ms] ease-in-out ${idx === current ? 'opacity-100 scale-100' : 'opacity-0 scale-110 blur-sm'}`}
              >
                 <img src={img} alt={`Trajetória Nayara ${idx + 1}`} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-80" />
              </div>
            ))}
            
-           <div className="absolute bottom-12 left-12 z-20 flex gap-3">
+           <div className="absolute top-10 left-1/2 -translate-x-1/2 z-20 flex gap-2">
               {images.map((_, idx) => (
                 <button 
                   key={idx} 
                   onClick={() => setCurrent(idx)}
-                  className={`h-1.5 transition-all duration-700 rounded-full ${idx === current ? 'w-16 bg-luxury-gold' : 'w-3 bg-white/20'}`} 
+                  className={`h-1.5 transition-all duration-700 rounded-full ${idx === current ? 'w-12 bg-luxury-gold' : 'w-2 bg-white/40'}`} 
                 />
               ))}
            </div>
