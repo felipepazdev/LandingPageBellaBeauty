@@ -70,6 +70,7 @@ const ScrollToTop = () => {
 };
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   
@@ -81,39 +82,88 @@ const Navbar = () => {
 
   const isHome = location.pathname === '/';
 
-  return (
-    <nav className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-500 ${scrolled ? 'bg-vapor-night/90 backdrop-blur-xl border-b border-white/5 py-3' : 'bg-transparent py-6'}`}>
-      <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group text-left">
-          <div className="w-10 h-10 rounded-xl bg-luxury-gold flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-[0_0_20px_rgba(197,160,40,0.3)]">
-            <Sparkles className="w-5 h-5 text-luxury-black" />
-          </div>
-          <div>
-            <span className="font-serif italic text-xl tracking-tighter text-white uppercase block leading-none">Bella Beauty</span>
-            <span className="text-[6px] font-mono tracking-[0.4em] text-luxury-gold uppercase mt-1.5 block opacity-70">Studio & Academy</span>
-          </div>
-        </Link>
-        
-        <div className="hidden lg:flex items-center gap-10 text-[11px] font-mono tracking-[0.2em] text-vapor-light/60">
-          <Link to="/" className="hover:text-vapor-accent transition-colors uppercase">Início</Link>
-          {isHome ? (
-            <>
-              <a href="#servicos" className="hover:text-vapor-accent transition-colors">SERVIÇOS</a>
-              <a href="#precos" className="hover:text-vapor-accent transition-colors">TABELA</a>
-              <a href="#especialistas" className="hover:text-vapor-accent transition-colors">EQUIPE</a>
-            </>
-          ) : (
-            <Link to="/#servicos" className="hover:text-vapor-accent transition-colors">SERVIÇOS</Link>
-          )}
-          <Link to="/curso" className="hover:text-vapor-accent transition-colors font-bold text-luxury-gold">CURSO</Link>
-          <a href="#contato" className="hover:text-vapor-accent transition-colors">CONTATO</a>
-        </div>
+  const menuItems = [
+    { label: 'Início', path: '/' },
+    { label: 'Serviços', path: isHome ? '#servicos' : '/#servicos' },
+    { label: 'Tabela', path: isHome ? '#precos' : '/#precos', hideOnCourse: true },
+    { label: 'Equipe', path: isHome ? '#especialistas' : '/#especialistas', hideOnCourse: true },
+    { label: 'Curso', path: '/curso', highlight: true },
+    { label: 'Contato', path: '#contato' },
+  ];
 
-        <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="bg-vapor-accent/10 border border-vapor-accent/30 text-vapor-accent px-6 py-2.5 rounded-full text-xs font-bold hover:bg-vapor-accent hover:text-white transition-all duration-300">
-          AGENDAR AGORA
-        </a>
+  return (
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-500 ${scrolled || isOpen ? 'bg-black/95 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-transparent py-8'}`}>
+        <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between gap-4">
+          <Link to="/" className="flex items-center gap-2 md:gap-3 group text-left shrink-0" onClick={() => setIsOpen(false)}>
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-luxury-gold flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-[0_0_20px_rgba(197,160,40,0.3)]">
+              <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-luxury-black" />
+            </div>
+            <div className="leading-tight">
+              <span className="font-serif italic text-lg md:text-xl tracking-tighter text-white uppercase block">Bella Beauty</span>
+              <span className="text-[5px] md:text-[6px] font-mono tracking-[0.4em] text-luxury-gold uppercase block mt-1 opacity-70">Studio & Academy</span>
+            </div>
+          </Link>
+          
+          <div className="hidden lg:flex items-center gap-10 text-[11px] font-mono tracking-[0.2em] text-vapor-light/60">
+            {menuItems.map((item, idx) => (
+              <Link 
+                key={idx} 
+                to={item.path.startsWith('#') ? (isHome ? item.path : `/${item.path}`) : item.path}
+                className={`hover:text-vapor-accent transition-colors uppercase ${item.highlight ? 'font-bold text-luxury-gold' : ''}`}
+                onClick={(e) => {
+                  if (item.path.startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(item.path)?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3 md:gap-6">
+            <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="hidden sm:inline-block bg-vapor-accent/10 border border-vapor-accent/30 text-vapor-accent px-5 py-2 rounded-full text-[10px] font-bold hover:bg-vapor-accent hover:text-white transition-all">
+              AGENDAR AGORA
+            </a>
+            
+            <button 
+              onClick={() => setIsOpen(!isOpen)}
+              className="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 text-white"
+            >
+              <div className={`w-6 h-[1px] bg-luxury-gold transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
+              <div className={`w-6 h-[1px] bg-luxury-gold transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`} />
+              <div className={`w-6 h-[1px] bg-luxury-gold transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 z-[999] lg:hidden transition-all duration-[600ms] cubic-bezier(0.85, 0, 0.15, 1) ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+         <div className="absolute inset-0 bg-black/95 backdrop-blur-2xl" />
+         <div className="relative h-full flex flex-col items-center justify-center gap-8 py-20 px-8 text-center">
+            {menuItems.map((item, idx) => (
+              <Link 
+                key={idx}
+                to={item.path}
+                className={`text-4xl italic font-serif text-white hover:text-luxury-gold transition-all duration-500 transform ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                style={{ transitionDelay: `${idx * 50}ms` }}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <div className={`mt-12 w-full max-w-xs space-y-6 transition-all duration-700 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: '300ms' }}>
+               <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="w-full btn-primary justify-center py-5 uppercase text-xs tracking-widest bg-luxury-gold text-black border-none">
+                  Falar no WhatsApp
+               </a>
+               <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Jacone, Saquarema - RJ</p>
+            </div>
+         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
@@ -164,23 +214,23 @@ const Contact = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-8">
-                <div className="flex gap-6 items-start">
-                  <div className="w-12 h-12 rounded-xl bg-vapor-accent/10 border border-vapor-accent/20 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-vapor-accent" />
+                <div className="flex gap-4 md:gap-6 items-start">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-vapor-accent/10 border border-vapor-accent/20 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-4 h-4 md:w-5 md:h-5 text-vapor-accent" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Endereço</span>
-                    <p className="text-base font-light text-white/80">Jaconé, Saquarema — RJ <br/> <span className="text-sm opacity-40 tracking-tight italic">Rua 96, nº 679</span></p>
+                    <span className="text-[9px] md:text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Endereço</span>
+                    <p className="text-sm md:text-base font-light text-white/80">Jaconé, Saquarema — RJ <br/> <span className="text-xs md:text-sm opacity-40 tracking-tight italic">Rua 96, nº 679</span></p>
                   </div>
                 </div>
 
-                <div className="flex gap-6 items-start">
-                  <div className="w-12 h-12 rounded-xl bg-vapor-accent/10 border border-vapor-accent/20 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-5 h-5 text-vapor-accent" />
+                <div className="flex gap-4 md:gap-6 items-start">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-vapor-accent/10 border border-vapor-accent/20 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-4 h-4 md:w-5 md:h-5 text-vapor-accent" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Horários</span>
-                    <p className="text-base font-light text-white/80">Terça a Sábado <br/> <span className="text-sm opacity-40 tracking-tight italic">09h às 18h</span></p>
+                    <span className="text-[9px] md:text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Horários</span>
+                    <p className="text-sm md:text-base font-light text-white/80">Terça a Sábado <br/> <span className="text-xs md:text-sm opacity-40 tracking-tight italic">09h às 18h</span></p>
                   </div>
                 </div>
               </div>
@@ -433,24 +483,24 @@ const HeroHome = () => {
     return () => ctx.revert();
   }, []);
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div className="hero-content z-10 space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-vapor-accent/10 border border-vapor-accent/20 text-vapor-accent text-[10px] font-mono uppercase tracking-widest">
+    <section ref={containerRef} className="relative min-h-[90vh] md:min-h-screen flex items-center pt-24 md:pt-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+        <div className="hero-content z-10 space-y-6 md:space-y-8 text-center lg:text-left flex flex-col items-center lg:items-start">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-vapor-accent/10 border border-vapor-accent/20 text-vapor-accent text-[9px] md:text-[10px] font-mono uppercase tracking-widest">
             <div className="w-1.5 h-1.5 rounded-full bg-vapor-accent animate-pulse" />
             Studio Premium em Jaconé
           </div>
-          <h1 className="text-7xl md:text-8xl leading-none font-serif italic text-white text-left">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl leading-[0.9] font-serif italic text-white">
             Bella Beauty <br/> 
-            <span className="text-vapor-accent not-italic font-sans font-black uppercase tracking-tighter text-4xl md:text-6xl block mt-4">
+            <span className="text-vapor-accent not-italic font-sans font-black uppercase tracking-tighter text-3xl sm:text-4xl md:text-6xl block mt-2 md:mt-4">
               Studio & Academy
             </span>
           </h1>
-          <p className="text-lg text-vapor-light/50 max-w-md font-light leading-relaxed">
+          <p className="text-base md:text-lg text-vapor-light/50 max-w-md font-light leading-relaxed">
             Especialistas em realçar sua beleza natural com o equilíbrio perfeito entre arte e tecnologia. Onde cada detalhe é uma assinatura de perfeição.
           </p>
-          <div className="flex flex-wrap gap-6 items-center">
-            <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="btn-primary uppercase text-xs tracking-widest">
+          <div className="flex flex-wrap gap-4 md:gap-6 items-center justify-center lg:justify-start pt-4 w-full sm:w-auto">
+            <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full sm:w-auto justify-center uppercase text-[10px] tracking-widest px-10">
               Agendar Agora
               <ArrowRight className="w-4 h-4" />
             </a>
@@ -745,8 +795,6 @@ const Specialists = () => {
 
 const NayaraTrajectory = () => {
   const [current, setCurrent] = useState(0);
-  
-  // Imagens reais importadas oficialmente
   const images = [t1, t2, t3, t4, t5, t6, t7, t8, t9];
 
   useEffect(() => {
@@ -757,35 +805,35 @@ const NayaraTrajectory = () => {
   }, [images.length]);
 
   return (
-    <section className="py-40 px-8 bg-black relative overflow-hidden border-y border-white/5">
+    <section className="py-24 md:py-40 px-6 md:px-8 bg-black relative overflow-hidden border-y border-white/5">
       <div className="absolute inset-0 bg-luxury-gold/[0.01] pointer-events-none" />
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-        {/* Copy Side */}
-        <div className="space-y-12">
-          <div className="space-y-6">
-             <span className="text-luxury-gold font-mono text-xs tracking-[0.5em] uppercase">Trajetória Real</span>
-             <h2 className="text-6xl md:text-8xl italic font-serif text-white tracking-tighter leading-none">
-                Da Luta à <span className="text-luxury-gold font-sans font-black not-italic block uppercase">Excelência</span>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center">
+        <div className="space-y-8 md:space-y-12 text-center lg:text-left">
+          <div className="space-y-4 md:space-y-6">
+             <span className="text-luxury-gold font-mono text-[10px] md:text-xs tracking-[0.5em] uppercase">Trajetória Real</span>
+             <h2 className="text-4xl md:text-8xl italic font-serif text-white tracking-tighter leading-none">
+                Da Luta à <br className="md:hidden" /> <span className="text-luxury-gold font-sans font-black not-italic inline-block md:block uppercase">Excelência</span>
              </h2>
-             <div className="w-20 h-[2px] bg-luxury-gold mt-4" />
+             <div className="w-16 md:w-20 h-[2px] bg-luxury-gold mt-4 mx-auto lg:mx-0" />
           </div>
 
-          <div className="space-y-10 text-white/50 font-light leading-relaxed text-xl italic font-serif relative">
-             <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-luxury-gold to-transparent" />
-             <p className="pl-10">
+          <div className="space-y-8 md:space-y-10 text-white/50 font-light leading-relaxed text-lg md:text-xl italic font-serif relative">
+             <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-luxury-gold to-transparent hidden lg:block" />
+             <p className="lg:pl-10">
                "Toda grande história tem um começo silencioso. O meu foi marcado pelo medo e pela insegurança, mas uma vontade indomável de fazer dar certo falava mais alto."
              </p>
-             <p className="pl-10 text-lg opacity-70 font-sans not-italic">
-               Comecei no improviso, atendendo em casa e percorrendo quilômetros para levar minha arte a domicílio. Treinava em bonecas quando faltavam modelos, mas nunca aceitei nada menos que o meu melhor.
-             </p>
-             <p className="pl-10 text-lg opacity-70 font-sans not-italic">
-               Investi em especializações com as maiores referências do mercado e celebrei cada certificado como um degrau para a autoridade. Hoje, os resultados impecáveis que entrego são fruto de uma jornada que nunca parou de buscar a perfeição.
-             </p>
+             <div className="space-y-6 lg:pl-10 text-base md:text-lg opacity-70 font-sans not-italic">
+               <p>
+                 Comecei no improviso, atendendo em casa e percorrendo quilômetros para levar minha arte a domicílio. Treinava em bonecas quando faltavam modelos, mas nunca aceitei nada menos que o meu melhor.
+               </p>
+               <p>
+                 Investi em especializações com as maiores referências do mercado e celebrei cada certificado como um degrau para a autoridade. Hoje, os resultados impecáveis que entrego são fruto de uma jornada que nunca parou de buscar a perfeição.
+               </p>
+             </div>
           </div>
         </div>
 
-        {/* Carousel Side */}
-        <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden glass-card border-white/10 shadow-[0_0_50px_rgba(197,160,40,0.1)] group">
+        <div className="relative aspect-[4/5] rounded-[2rem] md:rounded-[3rem] overflow-hidden glass-card border-white/10 shadow-[0_0_50px_rgba(197,160,40,0.1)] group max-w-md mx-auto w-full">
            {images.map((img, idx) => (
              <div 
                key={idx}
@@ -796,12 +844,12 @@ const NayaraTrajectory = () => {
              </div>
            ))}
            
-           <div className="absolute top-10 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+           <div className="absolute top-6 md:top-10 left-1/2 -translate-x-1/2 z-20 flex gap-2">
               {images.map((_, idx) => (
                 <button 
                   key={idx} 
                   onClick={() => setCurrent(idx)}
-                  className={`h-1.5 transition-all duration-700 rounded-full ${idx === current ? 'w-12 bg-luxury-gold' : 'w-2 bg-white/40'}`} 
+                  className={`h-1 md:h-1.5 transition-all duration-700 rounded-full ${idx === current ? 'w-8 md:w-12 bg-luxury-gold' : 'w-1.5 md:w-2 bg-white/40'}`} 
                 />
               ))}
            </div>
@@ -811,10 +859,9 @@ const NayaraTrajectory = () => {
   );
 };
 
-// Página de Curso
 const CoursePage = () => {
   const containerRef = useRef(null);
-  const [courseType, setCourseType] = useState('presencial'); // 'presencial' ou 'online'
+  const [courseType, setCourseType] = useState('presencial');
   
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -823,59 +870,56 @@ const CoursePage = () => {
     return () => ctx.revert();
   }, []);
 
-  const price = courseType === 'presencial' ? '1.290' : '903';
-
   return (
     <div ref={containerRef} className="pt-20">
-      <section className="course-hero py-32 px-8 min-h-[80vh] flex flex-col items-center justify-center text-center relative overflow-hidden">
+      <section className="course-hero py-24 md:py-32 px-6 md:px-8 min-h-[85vh] flex flex-col items-center justify-center text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('./assets/lashes.png')] bg-cover bg-center grayscale opacity-10" />
-        <div className="relative z-10 max-w-4xl space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-luxury-gold/10 border border-luxury-gold/20 text-luxury-gold text-[10px] font-mono uppercase tracking-widest">
+        <div className="relative z-10 max-w-4xl space-y-6 md:space-y-8">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-luxury-gold/10 border border-luxury-gold/20 text-luxury-gold text-[9px] md:text-[10px] font-mono uppercase tracking-widest">
             Formação Profissional
           </div>
-          <h1 className="text-7xl md:text-9xl leading-[0.9] font-serif italic text-white uppercase tracking-tighter">
+          <h1 className="text-5xl sm:text-6xl md:text-9xl leading-[0.9] font-serif italic text-white uppercase tracking-tighter">
             Curso de <span className="text-luxury-gold not-italic font-sans font-black">Cílios</span>
           </h1>
-          <p className="text-xl text-vapor-light/50 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-base md:text-xl text-vapor-light/50 max-w-2xl mx-auto font-light leading-relaxed px-4">
             Domine a arte da extensão de cílios com o método Bella Beauty. Do zero ao profissional com prática real ou no conforto da sua casa.
           </p>
           
-          {/* Seletor de Modalidade */}
-          <div className="flex justify-center pt-4">
-            <div className="bg-white/5 p-1.5 rounded-full border border-white/10 flex items-center gap-2">
+          <div className="flex justify-center pt-2 md:pt-4">
+            <div className="bg-white/5 p-1 rounded-full border border-white/10 flex items-center gap-1 md:gap-2 scale-90 md:scale-100">
               <button 
                 onClick={() => setCourseType('presencial')}
-                className={`px-8 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-widest transition-all duration-500 ${courseType === 'presencial' ? 'bg-luxury-gold text-luxury-black font-bold shadow-lg shadow-luxury-gold/20' : 'text-white/40 hover:text-white'}`}
+                className={`px-6 md:px-8 py-2 md:py-2.5 rounded-full text-[9px] md:text-[10px] font-mono uppercase tracking-widest transition-all duration-500 ${courseType === 'presencial' ? 'bg-luxury-gold text-luxury-black font-bold shadow-lg shadow-luxury-gold/20' : 'text-white/40 hover:text-white'}`}
               >
                 Presencial
               </button>
               <button 
                 onClick={() => setCourseType('online')}
-                className={`px-8 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-widest transition-all duration-500 ${courseType === 'online' ? 'bg-luxury-gold text-luxury-black font-bold shadow-lg shadow-luxury-gold/20' : 'text-white/40 hover:text-white'}`}
+                className={`px-6 md:px-8 py-2 md:py-2.5 rounded-full text-[9px] md:text-[10px] font-mono uppercase tracking-widest transition-all duration-500 ${courseType === 'online' ? 'bg-luxury-gold text-luxury-black font-bold shadow-lg shadow-luxury-gold/20' : 'text-white/40 hover:text-white'}`}
               >
                 Online
               </button>
             </div>
           </div>
 
-          <div className="flex justify-center pt-8">
-            <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="btn-primary uppercase text-xs tracking-widest px-12 py-6">
+          <div className="flex justify-center pt-6 md:pt-8 w-full max-w-sm mx-auto px-4">
+            <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full justify-center uppercase text-[10px] tracking-widest px-8 md:px-12 py-5 md:py-6">
               Quero me inscrever agora
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-2" />
             </a>
           </div>
         </div>
       </section>
 
-      <section className="py-32 px-8 bg-white/[0.02]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <section className="py-24 md:py-32 px-6 md:px-8 bg-white/[0.02]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {[
             { icon: <BookOpen className="w-8 h-8"/>, title: "Teoria Avançada", desc: "Ciclo biológico, química de adesivos e saúde ocular." },
             { icon: <Zap className="w-8 h-8"/>, title: "Método Exclusivo", desc: "Técnicas de agilidade e retenção prolongada." },
             { icon: <Users className="w-8 h-8"/>, title: courseType === 'presencial' ? "Aulas Práticas" : "Aulas Gravadas HD", desc: courseType === 'presencial' ? "Prática em modelos reais com supervisão direta." : "Acesso vitalício ao conteúdo em alta definição." },
             { icon: <Award className="w-8 h-8"/>, title: "Certificação", desc: "Certificado reconhecido para atuar no mercado." },
           ].map((item, i) => (
-            <div key={i} className="glass-card p-10 space-y-6 hover:border-luxury-gold/40 transition-all group">
+            <div key={i} className="glass-card p-8 md:p-10 space-y-6 hover:border-luxury-gold/40 transition-all group">
               <div className="text-luxury-gold group-hover:scale-110 transition-transform duration-500">{item.icon}</div>
               <h3 className="text-2xl italic">{item.title}</h3>
               <p className="text-sm text-vapor-light/40 leading-relaxed">{item.desc}</p>
@@ -884,45 +928,45 @@ const CoursePage = () => {
         </div>
       </section>
 
-      <section className="py-32 px-8">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-16">
-          <div className="w-full md:w-1/2 aspect-square rounded-cinema overflow-hidden glass-card">
+      <section className="py-24 md:py-32 px-6 md:px-8">
+        <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          <div className="w-full lg:w-1/2 aspect-square rounded-cinema overflow-hidden glass-card max-w-md mx-auto">
             <img src={nayaraImg} alt="Instrutora Nayara" className="w-full h-full object-cover" />
           </div>
-          <div className="w-full md:w-1/2 space-y-8">
-             <span className="text-luxury-gold font-mono text-xs uppercase tracking-widest">Sua Mentora</span>
-             <h2 className="text-6xl italic">Nayara <span className="text-white not-italic font-black">Lash Designer</span></h2>
-             <p className="text-vapor-light/60 font-light leading-relaxed">
+          <div className="w-full lg:w-1/2 space-y-6 md:space-y-8 text-center lg:text-left">
+             <span className="text-luxury-gold font-mono text-[10px] md:text-xs uppercase tracking-widest">Sua Mentora</span>
+             <h2 className="text-5xl md:text-6xl italic leading-none">Nayara <span className="text-white not-italic font-black">Lash Designer</span></h2>
+             <p className="text-vapor-light/60 font-light leading-relaxed text-sm md:text-base">
                Com mais de 5 anos de experiência e centenas de atendimentos realizados, Nayara desenvolveu um método que une rapidez e qualidade extrema. Você vai aprender os segredos que não estão nos livros de técnica básica.
              </p>
-             <ul className="space-y-4">
+             <ul className="space-y-4 text-left inline-block lg:block">
                {["Técnica de Isolamento Perfeita", "Mapeamento Facial Customizado", "Marketing para Lash Designers", "Suporte Pós-Curso Vitalício"].map(t => (
-                 <li key={t} className="flex items-center gap-3 text-sm italic"><CheckCircle2 className="w-5 h-5 text-luxury-gold"/> {t}</li>
+                 <li key={t} className="flex items-center gap-3 text-xs md:text-sm italic"><CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-luxury-gold"/> {t}</li>
                ))}
              </ul>
           </div>
         </div>
       </section>
 
-       <NayaraTrajectory />
+      <NayaraTrajectory />
 
-      <section className="py-32 px-8 bg-black relative">
+      <section className="py-24 md:py-32 px-6 md:px-8 bg-black relative">
         <div className="absolute inset-0 bg-luxury-gold/5 opacity-10 pointer-events-none" />
-        <div className="max-w-5xl mx-auto text-center space-y-16 relative z-10">
+        <div className="max-w-5xl mx-auto text-center space-y-12 md:space-y-16 relative z-10">
           <div className="space-y-4">
-             <span className="text-luxury-gold font-mono text-xs uppercase tracking-[0.4em] animate-pulse">Inicie sua Jornada</span>
-             <h2 className="text-6xl md:text-8xl italic font-serif leading-none uppercase">Transforme sua <br/> <span className="text-luxury-gold not-italic font-black">Carreira Hoje</span></h2>
+             <span className="text-luxury-gold font-mono text-[10px] md:text-xs uppercase tracking-[0.4em] animate-pulse">Inicie sua Jornada</span>
+             <h2 className="text-5xl md:text-8xl italic font-serif leading-tight md:leading-none uppercase tracking-tighter">Transforme sua <br/> <span className="text-luxury-gold not-italic font-black">Carreira Hoje</span></h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch pt-4">
-            <div className="glass-card bg-white/[0.03] border-white/10 p-12 rounded-cinema space-y-6 hover:border-luxury-gold/40 transition-all group text-center flex flex-col justify-between">
+            <div className="glass-card bg-white/[0.03] border-white/10 p-8 md:p-12 rounded-cinema space-y-6 hover:border-luxury-gold/40 transition-all group text-center flex flex-col justify-between">
               <div className="space-y-4">
-                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 group-hover:text-luxury-gold transition-colors">Modalidade Presencial</span>
+                <span className="text-[9px] md:text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 group-hover:text-luxury-gold transition-colors">Modalidade Presencial</span>
                 <div className="space-y-2">
-                  <div className="text-7xl font-sans font-black tracking-tighter text-white">R$ 1.290</div>
-                  <div className="text-[10px] text-luxury-gold font-mono tracking-[0.2em] font-bold">EM ATÉ 6X SEM JUROS</div>
+                  <div className="text-6xl md:text-7xl font-sans font-black tracking-tighter text-white">R$ 1.290</div>
+                  <div className="text-[9px] md:text-[10px] text-luxury-gold font-mono tracking-[0.2em] font-bold">EM ATÉ 6X SEM JUROS</div>
                 </div>
-                <p className="text-sm italic text-white/40 font-serif lowercase first-letter:uppercase leading-relaxed">Mentoria presencial individual ou em grupo <br/> com prática direta em modelos reais.</p>
+                <p className="text-xs md:text-sm italic text-white/40 font-serif lowercase first-letter:uppercase leading-relaxed">Mentoria presencial individual ou em grupo <br className="hidden md:block" /> com prática direta em modelos reais.</p>
               </div>
               <div className="pt-10">
                  <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="w-full btn-primary justify-center text-[10px] uppercase tracking-widest py-6 shadow-2xl shadow-luxury-gold/20">
@@ -931,14 +975,14 @@ const CoursePage = () => {
               </div>
             </div>
 
-            <div className="glass-card bg-white/[0.03] border-white/10 p-12 rounded-cinema space-y-6 hover:border-luxury-gold/40 transition-all group text-center flex flex-col justify-between">
+            <div className="glass-card bg-white/[0.03] border-white/10 p-8 md:p-12 rounded-cinema space-y-6 hover:border-luxury-gold/40 transition-all group text-center flex flex-col justify-between">
               <div className="space-y-4">
-                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 group-hover:text-luxury-gold transition-colors">Modalidade Online</span>
+                <span className="text-[9px] md:text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 group-hover:text-luxury-gold transition-colors">Modalidade Online</span>
                 <div className="space-y-2">
-                  <div className="text-7xl font-sans font-black tracking-tighter text-white">R$ 903</div>
-                  <div className="text-[10px] text-luxury-gold font-mono tracking-[0.2em] font-bold">EM ATÉ 6X SEM JUROS</div>
+                  <div className="text-6xl md:text-7xl font-sans font-black tracking-tighter text-white">R$ 903</div>
+                  <div className="text-[9px] md:text-[10px] text-luxury-gold font-mono tracking-[0.2em] font-bold">EM ATÉ 6X SEM JUROS</div>
                 </div>
-                <p className="text-sm italic text-white/40 font-serif lowercase first-letter:uppercase leading-relaxed">Formação completa em vídeo HD com <br/> acesso vitalício e suporte via WhatsApp.</p>
+                <p className="text-xs md:text-sm italic text-white/40 font-serif lowercase first-letter:uppercase leading-relaxed">Formação completa em vídeo HD com <br className="hidden md:block" /> acesso vitalício e suporte via WhatsApp.</p>
               </div>
               <div className="pt-10">
                  <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center bg-white/10 text-white border border-white/20 p-6 rounded-full font-bold hover:bg-white hover:text-black transition-all text-[10px] uppercase tracking-widest">
@@ -951,13 +995,18 @@ const CoursePage = () => {
           <div className="pt-8 space-y-8 flex flex-col items-center">
             <div className="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-luxury-gold/10 border border-luxury-gold/20 text-luxury-gold shadow-lg shadow-luxury-gold/5 animate-pulse">
               <Award className="w-4 h-4" />
-              <span className="text-[10px] font-mono uppercase tracking-[0.3em] font-bold">Certificado Profissional Incluso</span>
+              <span className="text-[10px] font-mono uppercase tracking-[0.3em] font-bold">Certificado Incluso</span>
             </div>
             <p className="text-white/20 text-[10px] font-mono uppercase tracking-[0.2em]">Condições especiais válidas em todos os cartões de crédito</p>
           </div>
         </div>
       </section>
-      <ContactCourse />
+      
+      <footer className="py-12 border-t border-white/5 text-center">
+        <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">
+          Bella Beauty Academy © 2026 — Todos os Direitos Reservados
+        </p>
+      </footer>
     </div>
   );
 };
