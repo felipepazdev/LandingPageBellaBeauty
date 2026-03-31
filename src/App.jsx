@@ -724,16 +724,19 @@ const Specialists = () => {
 
 const NayaraTrajectory = () => {
   const [current, setCurrent] = useState(0);
+  
+  // Lista de imagens da trajetória em ordem cronológica
+  // O usuário deve adicionar os arquivos t1.jpg até t9.jpg na pasta assets
   const images = [
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=O+Começo",
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Vontade+de+Vencer",
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Raízes+em+Casa",
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Atendimento+Remoto",
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Treino+Incessante",
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Aprimoramento",
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Conquistas",
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Evolução+Técnica",
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Perfeição+Atual"
+    "/src/assets/t1.jpg", 
+    "/src/assets/t2.jpg",
+    "/src/assets/t3.jpg",
+    "/src/assets/t4.jpg",
+    "/src/assets/t5.jpg",
+    "/src/assets/t6.jpg",
+    "/src/assets/t7.jpg",
+    "/src/assets/t8.jpg",
+    "/src/assets/t9.jpg"
   ];
 
   useEffect(() => {
