@@ -75,11 +75,14 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-500 ${scrolled ? 'bg-vapor-night/90 backdrop-blur-xl border-b border-white/5 py-3' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link to="/" className="flex items-center gap-3 group text-left">
           <div className="w-10 h-10 rounded-xl bg-luxury-gold flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-[0_0_20px_rgba(197,160,40,0.3)]">
             <Crown className="w-5 h-5 text-luxury-black" />
           </div>
-          <span className="font-serif italic text-2xl tracking-tighter text-white uppercase">Bella Beauty</span>
+          <div>
+            <span className="font-serif italic text-2xl tracking-tighter text-white uppercase block leading-none">Bella Beauty</span>
+            <span className="text-[7px] font-mono tracking-[0.4em] text-luxury-gold uppercase mt-1 block">Studio & Academy</span>
+          </div>
         </Link>
         
         <div className="hidden lg:flex items-center gap-10 text-[11px] font-mono tracking-[0.2em] text-vapor-light/60">
@@ -352,9 +355,12 @@ const Footer = () => {
     <footer className="bg-vapor-night pt-32 pb-16 px-8 relative overflow-hidden border-t border-white/5">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-16">
         <div className="space-y-6">
-           <Link to="/" className="flex items-center gap-3">
+           <Link to="/" className="flex items-center gap-3 text-left">
             <Sparkles className="w-6 h-6 text-vapor-accent" />
-            <span className="font-serif italic text-3xl text-white uppercase tracking-tighter">Bella Beauty</span>
+            <div>
+              <span className="font-serif italic text-3xl text-white uppercase tracking-tighter block leading-none">Bella Beauty</span>
+              <span className="text-[8px] font-mono tracking-[0.4em] text-luxury-gold uppercase mt-1 block">Studio & Academy</span>
+            </div>
           </Link>
           <p className="text-sm text-vapor-light/30 max-w-xs font-light tracking-wide">
             Transformando o autocuidado em Saquarema através da fusão entre arte clássica e tecnologia estética.
@@ -385,7 +391,7 @@ const Footer = () => {
       </div>
       
       <div className="max-w-7xl mx-auto mt-32 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-        <span className="text-[10px] font-mono text-white/20 tracking-[0.4em] uppercase">© 2026 Bella Beauty Studio</span>
+        <span className="text-[10px] font-mono text-white/20 tracking-[0.4em] uppercase">© 2026 Bella Beauty Studio & Academy</span>
         <div className="flex items-center gap-4">
            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
            <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">System Operational</span>
@@ -414,7 +420,7 @@ const HeroHome = () => {
             Studio Premium em Jaconé
           </div>
           <h1 className="text-7xl md:text-9xl leading-[0.9] font-serif italic text-white text-left">
-            Bella Beauty <br/> <span className="text-vapor-accent not-italic font-sans font-black uppercase">Studio</span>
+            Bella Beauty <br/> <span className="text-vapor-accent not-italic font-sans font-black uppercase">Studio & Academy</span>
           </h1>
           <p className="text-lg text-vapor-light/50 max-w-md font-light leading-relaxed">
             Especialistas em realçar sua beleza natural com o equilíbrio perfeito entre arte e tecnologia. Onde cada detalhe é uma assinatura de perfeição.
@@ -562,6 +568,76 @@ const PricingTable = () => {
             GARANTIR MINHA VAGA
             <Zap className="w-4 h-4 fill-current group-hover/btn:scale-125 transition-transform" />
           </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ServicePolicies = () => {
+  const policies = [
+    {
+      title: "Atrasos",
+      items: [
+        "Tolerância máxima de 10 minutos.",
+        "Após esse período, o atendimento poderá ser reduzido ou reagendado.",
+        "Em caso de reagendamento por atraso, será cobrada uma taxa de 30% do valor do procedimento (art. 395 do Código Civil)."
+      ]
+    },
+    {
+      title: "Faltas sem aviso",
+      items: [
+        "O não comparecimento sem aviso prévio é considerado falta injustificada.",
+        "Para novo agendamento, será necessário o pagamento antecipado de 50% do valor do procedimento."
+      ]
+    },
+    {
+      title: "Cancelamentos e Reagendamentos",
+      items: [
+        "Devem ser comunicados com mínimo de 24 horas de antecedência.",
+        "Cancelamentos fora desse prazo serão tratados como falta injustificada."
+      ]
+    },
+    {
+      title: "Nosso Compromisso",
+      items: [
+        "Cada horário é reservado exclusivamente para você.",
+        "Garantimos um atendimento com qualidade, dedicação e ambiente confortável.",
+        "Utilizamos materiais esterilizados e descartáveis, assegurando total higiene e segurança.",
+        "Oferecemos cada serviço personalizado, para valorizar a beleza de cada olhar de forma única.",
+        "Criamos uma experiência acolhedora, com conforto térmico, bebidas quentinhas e atendimento humanizado, para que você se sinta cuidada do início ao fim."
+      ]
+    }
+  ];
+
+  return (
+    <section id="politicas" className="py-32 px-8 bg-black/40">
+      <div className="max-w-4xl mx-auto glass-card p-12 md:p-20 border-white/5 relative overflow-hidden group">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[2px] bg-luxury-gold/50" />
+        <div className="text-center space-y-16">
+          <div className="space-y-4">
+             <h2 className="text-4xl md:text-5xl font-serif italic text-white uppercase tracking-tighter">Políticas de Atendimento</h2>
+             <div className="w-12 h-[1px] bg-luxury-gold mx-auto" />
+          </div>
+
+          <div className="space-y-20 text-left">
+            {policies.map((p, i) => (
+              <div key={i} className="space-y-8 group/item">
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-[1px] bg-luxury-gold/30 group-hover/item:w-12 transition-all" />
+                  <h3 className="text-2xl md:text-3xl font-serif italic text-white/90">{p.title}</h3>
+                </div>
+                <ul className="space-y-4 pl-12">
+                  {p.items.map((item, idx) => (
+                    <li key={idx} className="flex gap-4 items-start text-sm text-white/50 font-light leading-relaxed">
+                      <div className="w-1.5 h-1.5 rounded-full bg-luxury-gold/40 mt-2 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -758,6 +834,7 @@ const HomePage = () => (
     <BannerTrust />
     <ServiceSection />
     <PricingTable />
+    <ServicePolicies />
     <Specialists />
     <Contact />
   </>
