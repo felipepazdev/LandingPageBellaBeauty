@@ -80,8 +80,8 @@ const Navbar = () => {
             <Crown className="w-5 h-5 text-luxury-black" />
           </div>
           <div>
-            <span className="font-serif italic text-2xl tracking-tighter text-white uppercase block leading-none">Bella Beauty</span>
-            <span className="text-[7px] font-mono tracking-[0.4em] text-luxury-gold uppercase mt-1 block">Studio & Academy</span>
+            <span className="font-serif italic text-xl tracking-tighter text-white uppercase block leading-none">Bella Beauty</span>
+            <span className="text-[6px] font-mono tracking-[0.4em] text-luxury-gold uppercase mt-1.5 block opacity-70">Studio & Academy</span>
           </div>
         </Link>
         
@@ -358,8 +358,8 @@ const Footer = () => {
            <Link to="/" className="flex items-center gap-3 text-left">
             <Sparkles className="w-6 h-6 text-vapor-accent" />
             <div>
-              <span className="font-serif italic text-3xl text-white uppercase tracking-tighter block leading-none">Bella Beauty</span>
-              <span className="text-[8px] font-mono tracking-[0.4em] text-luxury-gold uppercase mt-1 block">Studio & Academy</span>
+              <span className="font-serif italic text-2xl text-white uppercase tracking-tighter block leading-none">Bella Beauty</span>
+              <span className="text-[7px] font-mono tracking-[0.4em] text-luxury-gold uppercase mt-1.5 block opacity-70">Studio & Academy</span>
             </div>
           </Link>
           <p className="text-sm text-vapor-light/30 max-w-xs font-light tracking-wide">
@@ -419,8 +419,11 @@ const HeroHome = () => {
             <div className="w-1.5 h-1.5 rounded-full bg-vapor-accent animate-pulse" />
             Studio Premium em Jaconé
           </div>
-          <h1 className="text-7xl md:text-9xl leading-[0.9] font-serif italic text-white text-left">
-            Bella Beauty <br/> <span className="text-vapor-accent not-italic font-sans font-black uppercase">Studio & Academy</span>
+          <h1 className="text-7xl md:text-8xl leading-none font-serif italic text-white text-left">
+            Bella Beauty <br/> 
+            <span className="text-vapor-accent not-italic font-sans font-black uppercase tracking-tighter text-4xl md:text-6xl block mt-4">
+              Studio & Academy
+            </span>
           </h1>
           <p className="text-lg text-vapor-light/50 max-w-md font-light leading-relaxed">
             Especialistas em realçar sua beleza natural com o equilíbrio perfeito entre arte e tecnologia. Onde cada detalhe é uma assinatura de perfeição.
