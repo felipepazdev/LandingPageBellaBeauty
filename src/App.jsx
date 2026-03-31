@@ -167,7 +167,7 @@ const Contact = () => {
               </div>
               <div>
                 <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Localização</span>
-                <p className="text-lg font-light">Jaconé, Saquarema — RJ <br/> <span className="text-sm opacity-40 tracking-tight italic">Rua da Estética, Próximo ao Centro</span></p>
+                <p className="text-lg font-light">Jaconé, Saquarema — RJ <br/> <span className="text-sm opacity-40 tracking-tight italic">Rua 96, nº 679 (Próximo ao Centro)</span></p>
               </div>
             </div>
 
@@ -241,6 +241,31 @@ const Contact = () => {
                 </button>
              </div>
            )}
+        </div>
+      </div>
+
+      {/* Google Maps Section */}
+      <div className="max-w-7xl mx-auto mt-20 relative px-4">
+        <div className="glass-card overflow-hidden rounded-[3rem] border-white/5 h-[450px] shadow-2xl relative group">
+           <div className="absolute inset-0 bg-luxury-gold/5 pointer-events-none z-10" />
+           <iframe 
+             title="Bella Beauty Location"
+             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3678.8953936932405!2d-42.5855!3d-22.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9771123a123a12!2sRua%2096%2C%20679%20-%20Jacon%C3%A9%2C%20Saquarema%20-%20RJ%2C%2028999-034!5e0!3m2!1spt-BR!2sbr!4v1727730000000!5m2!1spt-BR!2sbr" 
+             className="w-full h-full border-0 grayscale-[0.8] contrast-[1.2] opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[1.5s] ease-in-out"
+             allowFullScreen="" 
+             loading="lazy" 
+           />
+           <div className="absolute bottom-8 left-8 z-20">
+              <a 
+                href="https://maps.google.com/?q=Rua+96,+679,+Jaconé,+Saquarema+RJ" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn-primary py-4 px-8 text-[10px] tracking-widest"
+              >
+                Abrir no Maps
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </a>
+           </div>
         </div>
       </div>
     </section>
