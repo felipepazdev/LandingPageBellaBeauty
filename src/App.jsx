@@ -47,6 +47,15 @@ import designHennaImg from './assets/design-henna.png';
 import salaoRealImg from './assets/salao-real.jpg';
 import kellyImg from './assets/kelly.png';
 import nayaraImg from './assets/nayara.png';
+import t1 from './assets/t1.png';
+import t2 from './assets/t2.png';
+import t3 from './assets/t3.png';
+import t4 from './assets/t4.png';
+import t5 from './assets/t5.png';
+import t6 from './assets/t6.png';
+import t7 from './assets/t7.png';
+import t8 from './assets/t8.png';
+import t9 from './assets/t9.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -725,22 +734,8 @@ const Specialists = () => {
 const NayaraTrajectory = () => {
   const [current, setCurrent] = useState(0);
   
-  const imagesLabels = [
-    "O Começo Humilde",
-    "Dedicação Inabalável",
-    "Atendimento em Casa",
-    "Serviço Domiciliar",
-    "Treino Exaustivo",
-    "Aprimoramento Técnico",
-    "Primeiras Conquistas",
-    "Evolução Visível",
-    "Excelência Bella Beauty"
-  ];
-
-  // Use placeholders premium até que as fotos reais sejam adicionadas à pasta src/assets
-  const images = imagesLabels.map((label, i) => 
-    `https://placehold.co/800x1200/0f0f0f/c5a028?text=${label.replace(/ /g, '+')}`
-  );
+  // Imagens reais importadas oficialmente
+  const images = [t1, t2, t3, t4, t5, t6, t7, t8, t9];
 
   useEffect(() => {
     const timer = setInterval(() => {
