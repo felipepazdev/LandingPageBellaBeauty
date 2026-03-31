@@ -151,102 +151,90 @@ const Contact = () => {
   };
 
   return (
-    <section id="contato" className="py-32 px-8 bg-black relative overflow-hidden">
-       <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
+    <section id="contato" className="py-32 px-4 md:px-8 bg-black relative overflow-hidden">
+       <div className="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none">
           <MapPin className="w-[800px] h-[800px] text-vapor-accent absolute top-[-200px] right-[-200px]" />
        </div>
 
-      <div className="max-w-7xl mx-auto relative z-10 glass-card p-12 md:p-20 grid grid-cols-1 lg:grid-cols-2 gap-20">
-        <div className="space-y-12">
-          <h2 className="text-6xl italic leading-tight uppercase">Sinta a <br/> <span className="text-vapor-accent font-bold not-italic">Experiência</span></h2>
-          
-          <div className="space-y-8">
-            <div className="flex gap-6 items-start">
-              <div className="w-12 h-12 rounded-xl bg-vapor-accent/10 border border-vapor-accent/20 flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-6 h-6 text-vapor-accent" />
-              </div>
-              <div>
-                <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Localização</span>
-                <p className="text-lg font-light">Jaconé, Saquarema — RJ <br/> <span className="text-sm opacity-40 tracking-tight italic">Rua 96, nº 679 (Próximo ao Centro)</span></p>
-              </div>
-            </div>
+      <div className="max-w-[1400px] mx-auto relative z-10 grid grid-cols-1 xl:grid-cols-2 gap-12 items-stretch">
+        {/* Left Side: Info & Form */}
+        <div className="glass-card p-8 md:p-16 border-luxury-gold/10 flex flex-col justify-between gap-12">
+          <div className="space-y-12">
+            <h2 className="text-6xl md:text-7xl italic leading-tight uppercase tracking-tighter">Sinta a <br/> <span className="text-vapor-accent font-black not-italic">Experiência</span></h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-8">
+                <div className="flex gap-6 items-start">
+                  <div className="w-12 h-12 rounded-xl bg-vapor-accent/10 border border-vapor-accent/20 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-vapor-accent" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Endereço</span>
+                    <p className="text-base font-light text-white/80">Jaconé, Saquarema — RJ <br/> <span className="text-sm opacity-40 tracking-tight italic">Rua 96, nº 679</span></p>
+                  </div>
+                </div>
 
-            <div className="flex gap-6 items-start">
-              <div className="w-12 h-12 rounded-xl bg-vapor-accent/10 border border-vapor-accent/20 flex items-center justify-center flex-shrink-0">
-                <Clock className="w-6 h-6 text-vapor-accent" />
+                <div className="flex gap-6 items-start">
+                  <div className="w-12 h-12 rounded-xl bg-vapor-accent/10 border border-vapor-accent/20 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-5 h-5 text-vapor-accent" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Horários</span>
+                    <p className="text-base font-light text-white/80">Terça a Sábado <br/> <span className="text-sm opacity-40 tracking-tight italic">09h às 18h</span></p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Horários</span>
-                <p className="text-lg font-light">Terça a Sábado <br/> <span className="text-sm opacity-40 tracking-tight italic">09h às 18h</span></p>
-              </div>
-            </div>
 
-            <div className="flex gap-6 items-start">
-              <div className="w-12 h-12 rounded-xl bg-vapor-accent/10 border border-vapor-accent/20 flex items-center justify-center flex-shrink-0">
-                <PhoneCall className="w-6 h-6 text-vapor-accent" />
-              </div>
-              <div>
-                <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Contato Direto</span>
-                <p className="text-lg font-light">+55 (21) 97568-3691</p>
+              <div className="space-y-6">
+                {!isSubmitted ? (
+                  <form className="space-y-4" onSubmit={handleSubmit}>
+                    <input 
+                      required
+                      type="text" 
+                      placeholder="Seu Nome" 
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-vapor-accent transition-colors text-sm" 
+                    />
+                    <input 
+                      required
+                      type="text" 
+                      placeholder="Serviço" 
+                      value={formData.service}
+                      onChange={(e) => setFormData({...formData, service: e.target.value})}
+                      className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-vapor-accent transition-colors text-sm" 
+                    />
+                    <button type="submit" className="w-full btn-primary justify-center py-4 text-[10px] uppercase tracking-[0.2em] group">
+                      Agendar Visita
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </form>
+                ) : (
+                  <div className="text-center p-8 bg-vapor-accent/10 rounded-2xl border border-vapor-accent/20">
+                    <CheckCircle2 className="w-8 h-8 text-vapor-accent mx-auto mb-4" />
+                    <p className="text-sm text-white font-serif italic">Recebemos sua mensagem!</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="glass-card p-8 md:p-12 bg-vapor-night/50 border-white/5 space-y-8 min-h-[400px] flex flex-col justify-center">
-           {!isSubmitted ? (
-             <>
-               <h3 className="text-2xl font-serif italic">Dúvidas ou Pré-Avaliação?</h3>
-               <p className="text-sm text-white/40 font-light">Mande uma mensagem e nossa equipe retornará em instantes.</p>
-               <form className="space-y-6" onSubmit={handleSubmit}>
-                  <input 
-                    required
-                    type="text" 
-                    placeholder="Seu Nome" 
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-vapor-accent transition-colors text-sm" 
-                  />
-                  <input 
-                    required
-                    type="text" 
-                    placeholder="Serviço de Interesse" 
-                    value={formData.service}
-                    onChange={(e) => setFormData({...formData, service: e.target.value})}
-                    className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-vapor-accent transition-colors text-sm" 
-                  />
-                  <button type="submit" className="w-full btn-primary justify-center py-6 text-sm uppercase tracking-widest group">
-                    Enviar Mensagem
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
-               </form>
-             </>
-           ) : (
-             <div className="text-center space-y-6 animate-in fade-in zoom-in duration-500">
-                <div className="w-20 h-20 bg-vapor-accent/20 rounded-full flex items-center justify-center mx-auto border border-vapor-accent/30">
-                  <CheckCircle2 className="w-10 h-10 text-vapor-accent animate-bounce" />
+          <div className="pt-8 border-t border-white/5 flex items-center justify-between">
+             <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-vapor-accent">
+                   <PhoneCall className="w-5 h-5" />
                 </div>
-                <div className="space-y-2">
-                  <h3 className="text-3xl font-serif italic text-white">Mensagem Enviada!</h3>
-                  <p className="text-vapor-light/40 leading-relaxed">
-                    Mensagem enviada com sucesso para nossa equipe através do WhatsApp. <br/> 
-                    <span className="text-vapor-accent font-medium">Em breve entraremos em contato.</span>
-                  </p>
+                <div>
+                   <span className="text-[9px] font-mono text-white/30 uppercase block">Contato Direto</span>
+                   <span className="text-sm font-bold text-white">+55 (21) 97568-3691</span>
                 </div>
-                <button 
-                  onClick={() => setIsSubmitted(false)}
-                  className="text-xs font-mono text-white/20 uppercase tracking-widest hover:text-vapor-accent transition-colors"
-                >
-                  Enviar outra mensagem
-                </button>
              </div>
-           )}
+             <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="text-[10px] font-mono text-vapor-light/30 hover:text-vapor-accent transition-colors uppercase tracking-widest">Mandar WhatsApp</a>
+          </div>
         </div>
-      </div>
 
-      {/* Google Maps Section */}
-      <div className="max-w-7xl mx-auto mt-20 relative px-4">
-        <div className="glass-card overflow-hidden rounded-[3rem] border-white/5 h-[450px] shadow-2xl relative group">
+        {/* Right Side: Map */}
+        <div className="glass-card overflow-hidden rounded-[3rem] border-white/5 relative group min-h-[500px]">
            <div className="absolute inset-0 bg-luxury-gold/5 pointer-events-none z-10" />
            <iframe 
              title="Bella Beauty Location"
@@ -260,10 +248,9 @@ const Contact = () => {
                 href="https://maps.google.com/?q=Rua+96,+679,+Jaconé,+Saquarema+RJ" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="btn-primary py-4 px-8 text-[10px] tracking-widest"
+                className="btn-primary py-4 px-8 text-[10px] tracking-widest shadow-2xl"
               >
                 Abrir no Maps
-                <ArrowRight className="w-4 h-4 ml-2" />
               </a>
            </div>
         </div>
