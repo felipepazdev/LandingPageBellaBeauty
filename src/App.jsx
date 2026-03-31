@@ -77,7 +77,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group text-left">
           <div className="w-10 h-10 rounded-xl bg-luxury-gold flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-[0_0_20px_rgba(197,160,40,0.3)]">
-            <Crown className="w-5 h-5 text-luxury-black" />
+            <Sparkles className="w-5 h-5 text-luxury-black" />
           </div>
           <div>
             <span className="font-serif italic text-xl tracking-tighter text-white uppercase block leading-none">Bella Beauty</span>
