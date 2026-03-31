@@ -725,19 +725,22 @@ const Specialists = () => {
 const NayaraTrajectory = () => {
   const [current, setCurrent] = useState(0);
   
-  // Lista de imagens da trajetória em ordem cronológica
-  // O usuário deve adicionar os arquivos t1.jpg até t9.jpg na pasta assets
-  const images = [
-    "/src/assets/t1.jpg", 
-    "/src/assets/t2.jpg",
-    "/src/assets/t3.jpg",
-    "/src/assets/t4.jpg",
-    "/src/assets/t5.jpg",
-    "/src/assets/t6.jpg",
-    "/src/assets/t7.jpg",
-    "/src/assets/t8.jpg",
-    "/src/assets/t9.jpg"
+  const imagesLabels = [
+    "O Começo Humilde",
+    "Dedicação Inabalável",
+    "Atendimento em Casa",
+    "Serviço Domiciliar",
+    "Treino Exaustivo",
+    "Aprimoramento Técnico",
+    "Primeiras Conquistas",
+    "Evolução Visível",
+    "Excelência Bella Beauty"
   ];
+
+  // Use placeholders premium até que as fotos reais sejam adicionadas à pasta src/assets
+  const images = imagesLabels.map((label, i) => 
+    `https://placehold.co/800x1200/0f0f0f/c5a028?text=${label.replace(/ /g, '+')}`
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
