@@ -243,6 +243,126 @@ const Contact = () => {
   );
 };
 
+const ContactCourse = () => {
+  const [formData, setFormData] = useState({ name: '', interest: '', whatsapp: '' });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const message = `Olá Bella Beauty! Me chamo ${formData.name}. Tenho interesse no Curso e gostaria de saber mais sobre a modalidade ${formData.interest}. Meu WhatsApp: ${formData.whatsapp}.`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/5521975683691?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+    setIsSubmitted(true);
+  };
+
+  return (
+    <section className="py-32 px-8 bg-black relative overflow-hidden">
+       <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
+          <BookOpen className="w-[800px] h-[800px] text-luxury-gold absolute top-[-200px] right-[-200px]" />
+       </div>
+
+      <div className="max-w-7xl mx-auto relative z-10 glass-card p-12 md:p-20 grid grid-cols-1 lg:grid-cols-2 gap-20 border-luxury-gold/10">
+        <div className="space-y-12">
+          <h2 className="text-6xl italic leading-tight uppercase text-white">Comece sua <br/> <span className="text-luxury-gold font-black not-italic">Carreira de Sucesso</span></h2>
+          
+          <div className="space-y-8">
+            <div className="flex gap-6 items-start">
+              <div className="w-12 h-12 rounded-xl bg-luxury-gold/10 border border-luxury-gold/20 flex items-center justify-center flex-shrink-0">
+                <Zap className="w-6 h-6 text-luxury-gold" />
+              </div>
+              <div>
+                <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Aceleração</span>
+                <p className="text-lg font-light text-white/80">Recuperação do investimento <br/> <span className="text-sm opacity-40 tracking-tight italic">em média nos primeiros 30 dias de atuação.</span></p>
+              </div>
+            </div>
+
+            <div className="flex gap-6 items-start">
+              <div className="w-12 h-12 rounded-xl bg-luxury-gold/10 border border-luxury-gold/20 flex items-center justify-center flex-shrink-0">
+                <Users className="w-6 h-6 text-luxury-gold" />
+              </div>
+              <div>
+                <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Suporte Individual</span>
+                <p className="text-lg font-light text-white/80">Mentoria Direta <br/> <span className="text-sm opacity-40 tracking-tight italic">Tire todas as suas dúvidas diretamente com a Nayara.</span></p>
+              </div>
+            </div>
+
+            <div className="flex gap-6 items-start">
+              <div className="w-12 h-12 rounded-xl bg-luxury-gold/10 border border-luxury-gold/20 flex items-center justify-center flex-shrink-0">
+                <Award className="w-6 h-6 text-luxury-gold" />
+              </div>
+              <div>
+                <span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest">Certificado</span>
+                <p className="text-lg font-light text-white/80">Acesso ao Mercado <br/> <span className="text-sm opacity-40 tracking-tight italic">Certificação reconhecida em todo o território nacional.</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="glass-card p-8 md:p-12 bg-white/[0.02] border-white/5 space-y-8 min-h-[400px] flex flex-col justify-center">
+           {!isSubmitted ? (
+             <>
+               <h3 className="text-2xl font-serif italic text-white">Dúvida sobre o Curso?</h3>
+               <p className="text-sm text-white/40 font-light">Preencha os dados e nossa consultoria pedagógica entrará em contato.</p>
+               <form className="space-y-6" onSubmit={handleSubmit}>
+                  <input 
+                    required
+                    type="text" 
+                    placeholder="Seu Nome" 
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-luxury-gold transition-colors text-sm text-white" 
+                  />
+                  <input 
+                    required
+                    type="text" 
+                    placeholder="Seu WhatsApp" 
+                    value={formData.whatsapp}
+                    onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-luxury-gold transition-colors text-sm text-white" 
+                  />
+                  <select 
+                    required
+                    value={formData.interest}
+                    onChange={(e) => setFormData({...formData, interest: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-luxury-gold transition-colors text-sm text-white/60 appearance-none bg-black"
+                  >
+                    <option value="" disabled className="text-white/40">Qual modalidade você prefere?</option>
+                    <option value="Presencial" className="text-white bg-black">Curso Presencial (Saquarema)</option>
+                    <option value="Online" className="text-white bg-black">Curso Online (Acesso Vitalício)</option>
+                  </select>
+                  <button type="submit" className="w-full btn-primary bg-luxury-gold text-black border-none justify-center py-6 text-sm uppercase tracking-widest group hover:bg-white hover:text-black transition-all">
+                    Quero saber mais
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+               </form>
+             </>
+           ) : (
+             <div className="text-center space-y-6 animate-in fade-in zoom-in duration-500">
+                <div className="w-20 h-20 bg-luxury-gold/20 rounded-full flex items-center justify-center mx-auto border border-luxury-gold/30">
+                  <CheckCircle2 className="w-10 h-10 text-luxury-gold animate-bounce" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-3xl font-serif italic text-white">Interesse Registrado!</h3>
+                  <p className="text-white/40 leading-relaxed">
+                    Sua solicitação de informações foi enviada com sucesso. <br/> 
+                    <span className="text-luxury-gold font-medium">Em breve nossa equipe pedagógica falará com você.</span>
+                  </p>
+                </div>
+                <button 
+                  onClick={() => setIsSubmitted(false)}
+                  className="text-xs font-mono text-white/20 uppercase tracking-widest hover:text-luxury-gold transition-colors"
+                >
+                  Fazer nova pergunta
+                </button>
+             </div>
+           )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Footer = () => {
   return (
     <footer className="bg-vapor-night pt-32 pb-16 px-8 relative overflow-hidden border-t border-white/5">
@@ -634,7 +754,7 @@ const CoursePage = () => {
           </div>
         </div>
       </section>
-      <Contact />
+      <ContactCourse />
     </div>
   );
 };
