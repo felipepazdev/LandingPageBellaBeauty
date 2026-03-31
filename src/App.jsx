@@ -551,7 +551,7 @@ const ServiceSection = () => {
       <div className="max-w-7xl mx-auto space-y-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 text-center md:text-left">
           <div className="space-y-4">
-            <h2 className="text-7xl italic leading-none">Serviços <br/> <span className="text-luxury-gold not-italic font-black tracking-tighter uppercase">Especiais</span></h2>
+            <h2 className="text-5xl sm:text-7xl italic leading-none">Serviços <br/> <span className="text-luxury-gold not-italic font-black tracking-tighter uppercase">Especiais</span></h2>
             <p className="text-white/20 font-mono text-xs tracking-[0.4em] uppercase">Excelência que você sente</p>
           </div>
         </div>
@@ -587,7 +587,7 @@ const ServiceModal = ({ service, onClose }) => {
   if (!service) return null;
   const currentItem = service.items[currentIndex];
   return (
-    <div className="fixed inset-0 z-[1001] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl pointer-events-auto" onClick={onClose}>
+    <div className="absolute inset-0 z-[1001] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl pointer-events-auto" onClick={onClose}>
       <div className="bg-[#0A0A0A] border border-luxury-gold/20 w-full max-w-5xl rounded-[3rem] overflow-hidden relative shadow-[0_0_100px_rgba(0,0,0,0.8)]" onClick={(e) => e.stopPropagation()}>
         <button onClick={onClose} className="absolute top-8 right-8 z-30 w-12 h-12 rounded-full bg-black/60 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold transition-all"><X className="w-6 h-6" /></button>
         <div className="flex flex-col lg:flex-row min-h-[600px]">
@@ -636,7 +636,7 @@ const PricingTable = () => {
             <span className="text-[10px] font-mono tracking-widest uppercase bg-luxury-gold text-white px-3 py-1 rounded-full text-center">Destaque do Mês</span>
             <h3 className="text-5xl font-serif italic text-luxury-black">Spa Day <br/> Bella Beauty</h3>
             <p className="font-light opacity-80 text-luxury-black/60">Pacote completo com Cílios + Design de Unhas + Revitalização Facial.</p>
-            <div className="text-6xl font-sans font-black text-luxury-gold">R$ 259,90</div>
+            <div className="text-4xl md:text-6xl font-sans font-black text-luxury-gold whitespace-nowrap">R$ 259,90</div>
           </div>
           <a href={WZ_URL} target="_blank" rel="noopener noreferrer" className="relative z-10 mt-12 w-full bg-luxury-black text-white py-5 rounded-full font-bold hover:bg-vapor-accent transition-colors flex items-center justify-center gap-3 group/btn uppercase text-xs tracking-widest">
             GARANTIR MINHA VAGA
@@ -686,7 +686,7 @@ const ServicePolicies = () => {
       <div className="max-w-7xl mx-auto space-y-24">
         <div className="text-center space-y-4">
            <span className="text-[10px] font-mono text-luxury-gold tracking-[0.5em] uppercase">Protocolos & Ética</span>
-           <h2 className="text-6xl md:text-8xl italic font-serif text-white tracking-tighter uppercase">
+           <h2 className="text-4xl sm:text-5xl md:text-8xl italic font-serif text-white tracking-tighter uppercase">
               Políticas de <span className="text-luxury-gold font-sans font-black not-italic">Atendimento</span>
            </h2>
            <div className="w-24 h-[1px] bg-luxury-gold/30 mx-auto mt-8" />
@@ -727,7 +727,7 @@ const ServicePolicies = () => {
            
            <div className="max-w-5xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
               <div className="space-y-10">
-                 <h3 className="text-6xl md:text-7xl italic font-serif text-white leading-none uppercase">Nosso <br/> <span className="text-luxury-gold font-sans font-black not-italic">Compromisso</span></h3>
+                 <h3 className="text-4xl sm:text-5xl md:text-7xl italic font-serif text-white leading-none uppercase">Nosso <br/> <span className="text-luxury-gold font-sans font-black not-italic">Compromisso</span></h3>
                  <div className="w-16 h-[2px] bg-luxury-gold" />
                  <p className="text-xl text-white/60 italic font-serif leading-relaxed font-light">
                    "Cada horário é reservado exclusivamente para você. Garantimos um atendimento com qualidade, dedicação e ambiente confortável."
