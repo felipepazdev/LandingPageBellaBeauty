@@ -725,19 +725,23 @@ const Specialists = () => {
 const NayaraTrajectory = () => {
   const [current, setCurrent] = useState(0);
   const images = [
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Meu+Começo",
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=O+Começo",
     "https://placehold.co/800x1200/0a0a0a/c5a028?text=Vontade+de+Vencer",
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Atendimento+em+Casa",
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Atendimento+Domicílio",
-    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Treino+em+Bonecas"
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Raízes+em+Casa",
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Atendimento+Remoto",
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Treino+Incessante",
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Aprimoramento",
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Conquistas",
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Evolução+Técnica",
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Perfeição+Atual"
   ];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 4000);
+    }, 4500);
     return () => clearInterval(timer);
-  }, []);
+  }, [images.length]);
 
   return (
     <section className="py-40 px-8 bg-black relative overflow-hidden border-y border-white/5">
@@ -748,7 +752,7 @@ const NayaraTrajectory = () => {
           <div className="space-y-6">
              <span className="text-luxury-gold font-mono text-xs tracking-[0.5em] uppercase">Trajetória Real</span>
              <h2 className="text-6xl md:text-8xl italic font-serif text-white tracking-tighter leading-none">
-                De Onde <span className="text-luxury-gold font-sans font-black not-italic block uppercase">Eu Vim</span>
+                Da Luta à <span className="text-luxury-gold font-sans font-black not-italic block uppercase">Excelência</span>
              </h2>
              <div className="w-20 h-[2px] bg-luxury-gold mt-4" />
           </div>
@@ -756,13 +760,13 @@ const NayaraTrajectory = () => {
           <div className="space-y-10 text-white/50 font-light leading-relaxed text-xl italic font-serif relative">
              <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-luxury-gold to-transparent" />
              <p className="pl-10">
-               "Toda grande história tem um começo silencioso. O meu começou com o medo e a insegurança sussurrando baixinho, mas a vontade inabalável de fazer dar certo falava mais alto."
+               "Toda grande história tem um começo silencioso. O meu foi marcado pelo medo e pela insegurança, mas uma vontade indomável de fazer dar certo falava mais alto."
              </p>
              <p className="pl-10 text-lg opacity-70 font-sans not-italic">
-               Comecei atendendo em casa e percorrendo quilômetros para levar minha arte a domicílio. Eu nunca aceitei entregar menos que o meu melhor — mesmo quando as condições não eram perfeitas.
+               Comecei no improviso, atendendo em casa e percorrendo quilômetros para levar minha arte a domicílio. Treinava em bonecas quando faltavam modelos, mas nunca aceitei nada menos que o meu melhor.
              </p>
              <p className="pl-10 text-lg opacity-70 font-sans not-italic">
-               Quando não havia modelos, bonecas e materiais improvisados eram minha escola de perfeição. Treinava como dava, com o que tinha, mas sempre focada na excelência que eu sabia que podia alcançar.
+               Investi em especializações com as maiores referências do mercado e celebrei cada certificado como um degrau para a autoridade. Hoje, os resultados impecáveis que entrego são fruto de uma jornada que nunca parou de buscar a perfeição.
              </p>
           </div>
         </div>
