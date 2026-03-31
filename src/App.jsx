@@ -722,6 +722,78 @@ const Specialists = () => {
   );
 };
 
+const NayaraTrajectory = () => {
+  const [current, setCurrent] = useState(0);
+  const images = [
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Meu+Começo",
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Vontade+de+Vencer",
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Atendimento+em+Casa",
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Atendimento+Domicílio",
+    "https://placehold.co/800x1200/0a0a0a/c5a028?text=Treino+em+Bonecas"
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="py-40 px-8 bg-black relative overflow-hidden border-y border-white/5">
+      <div className="absolute inset-0 bg-luxury-gold/[0.01] pointer-events-none" />
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+        {/* Copy Side */}
+        <div className="space-y-12">
+          <div className="space-y-6">
+             <span className="text-luxury-gold font-mono text-xs tracking-[0.5em] uppercase">Trajetória Real</span>
+             <h2 className="text-6xl md:text-8xl italic font-serif text-white tracking-tighter leading-none">
+                De Onde <span className="text-luxury-gold font-sans font-black not-italic block uppercase">Eu Vim</span>
+             </h2>
+             <div className="w-20 h-[2px] bg-luxury-gold mt-4" />
+          </div>
+
+          <div className="space-y-10 text-white/50 font-light leading-relaxed text-xl italic font-serif relative">
+             <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-luxury-gold to-transparent" />
+             <p className="pl-10">
+               "Toda grande história tem um começo silencioso. O meu começou com o medo e a insegurança sussurrando baixinho, mas a vontade inabalável de fazer dar certo falava mais alto."
+             </p>
+             <p className="pl-10 text-lg opacity-70 font-sans not-italic">
+               Comecei atendendo em casa e percorrendo quilômetros para levar minha arte a domicílio. Eu nunca aceitei entregar menos que o meu melhor — mesmo quando as condições não eram perfeitas.
+             </p>
+             <p className="pl-10 text-lg opacity-70 font-sans not-italic">
+               Quando não havia modelos, bonecas e materiais improvisados eram minha escola de perfeição. Treinava como dava, com o que tinha, mas sempre focada na excelência que eu sabia que podia alcançar.
+             </p>
+          </div>
+        </div>
+
+        {/* Carousel Side */}
+        <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden glass-card border-white/10 shadow-[0_0_50px_rgba(197,160,40,0.1)] group">
+           {images.map((img, idx) => (
+             <div 
+               key={idx}
+               className={`absolute inset-0 transition-all duration-[2000ms] ease-in-out ${idx === current ? 'opacity-100 scale-100' : 'opacity-0 scale-110 blur-sm'}`}
+             >
+                <img src={img} alt={`Trajetória Nayara ${idx + 1}`} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+             </div>
+           ))}
+           
+           <div className="absolute bottom-12 left-12 z-20 flex gap-3">
+              {images.map((_, idx) => (
+                <button 
+                  key={idx} 
+                  onClick={() => setCurrent(idx)}
+                  className={`h-1.5 transition-all duration-700 rounded-full ${idx === current ? 'w-16 bg-luxury-gold' : 'w-3 bg-white/20'}`} 
+                />
+              ))}
+           </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // Página de Curso
 const CoursePage = () => {
   const containerRef = useRef(null);
@@ -814,6 +886,8 @@ const CoursePage = () => {
           </div>
         </div>
       </section>
+
+       <NayaraTrajectory />
 
       <section className="py-32 px-8 bg-black relative">
         <div className="absolute inset-0 bg-luxury-gold/5 opacity-10 pointer-events-none" />
