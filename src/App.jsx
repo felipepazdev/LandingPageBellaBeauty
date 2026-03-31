@@ -125,12 +125,12 @@ const BannerTrust = () => {
 };
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', service: '', whatsapp: '' });
+  const [formData, setFormData] = useState({ name: '', service: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const message = `Olá Bella Beauty! Me chamo ${formData.name}. Gostaria de uma avaliação sobre ${formData.service}. Meu WhatsApp para contato é ${formData.whatsapp}.`;
+    const message = `Olá Bella Beauty! Me chamo ${formData.name}. Gostaria de uma avaliação sobre ${formData.service}.`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/5521975683691?text=${encodedMessage}`;
     
@@ -198,14 +198,6 @@ const Contact = () => {
                   <input 
                     required
                     type="text" 
-                    placeholder="WhatsApp (Ex: 21 99999-9999)" 
-                    value={formData.whatsapp}
-                    onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
-                    className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-vapor-accent transition-colors text-sm" 
-                  />
-                  <input 
-                    required
-                    type="text" 
                     placeholder="Serviço de Interesse" 
                     value={formData.service}
                     onChange={(e) => setFormData({...formData, service: e.target.value})}
@@ -244,12 +236,12 @@ const Contact = () => {
 };
 
 const ContactCourse = () => {
-  const [formData, setFormData] = useState({ name: '', interest: '', whatsapp: '' });
+  const [formData, setFormData] = useState({ name: '', interest: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const message = `Olá Bella Beauty! Me chamo ${formData.name}. Tenho interesse no Curso e gostaria de saber mais sobre a modalidade ${formData.interest}. Meu WhatsApp: ${formData.whatsapp}.`;
+    const message = `Olá Bella Beauty! Me chamo ${formData.name}. Tenho interesse no Curso e gostaria de saber mais sobre a modalidade ${formData.interest}.`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/5521975683691?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
@@ -311,14 +303,6 @@ const ContactCourse = () => {
                     placeholder="Seu Nome" 
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-luxury-gold transition-colors text-sm text-white" 
-                  />
-                  <input 
-                    required
-                    type="text" 
-                    placeholder="Seu WhatsApp" 
-                    value={formData.whatsapp}
-                    onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-luxury-gold transition-colors text-sm text-white" 
                   />
                   <select 
